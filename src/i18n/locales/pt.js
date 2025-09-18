@@ -235,7 +235,7 @@ Exemplo:
     modified: 'Modificado',
     size: 'Tamanho',
     created: 'Criado',
-    modified: 'Modificado'
+    lastModified: 'Última modificação'
   },
 
   // Mobile Interface

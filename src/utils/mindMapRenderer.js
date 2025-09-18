@@ -214,7 +214,8 @@ class MindMapRenderer {
 
         // Primeiro, posicionar subsections como nível intermediário
         if (subsectionItems.length > 0) {
-          this.layoutSubsectionsAsIntermediateLevel(subsectionItems, sectionX, sectionY, angle, index)
+          this.layoutSubsectionsAsIntermediateLevel(subsectionItems, sectionX,
+            sectionY, angle, index)
         }
 
         // Depois, posicionar bullet points diretos da seção
@@ -309,8 +310,10 @@ class MindMapRenderer {
 
         // Adicionar itens da subsection
         if (item.items && item.items.length > 0) {
-          const subItemRadius = this.config.levelSpacing * 1.0 // Aumentado de 0.75 para 1.0
-          const subItemAngleStep = (Math.PI * 1.2) / Math.max(item.items.length, 1) // Aumentado de 1.0 para 1.2
+          // Aumentado de 0.75 para 1.0
+          const subItemRadius = this.config.levelSpacing * 1.0
+          // Aumentado de 1.0 para 1.2
+          const subItemAngleStep = (Math.PI * 1.2) / Math.max(item.items.length, 1)
           const subBaseAngle = itemAngle - (subItemAngleStep * (item.items.length - 1)) / 2
 
           item.items.forEach((subItem, subItemIndex) => {
@@ -654,10 +657,12 @@ class MindMapRenderer {
     this.fitToView()
   }
 
-  layoutSubsectionsAsIntermediateLevel(subsectionItems, sectionX, sectionY, sectionAngle, sectionIndex) {
+  layoutSubsectionsAsIntermediateLevel(subsectionItems, sectionX, sectionY,
+    sectionAngle, sectionIndex) {
     // Posicionar subsections como um nível intermediário entre seção e bullets
     const intermediateRadius = this.config.levelSpacing * 1.2 // Distância intermediária
-    const subsectionAngleStep = (Math.PI * 0.8) / Math.max(1, subsectionItems.length - 1) // Arco de 144 graus
+    // Arco de 144 graus
+    const subsectionAngleStep = (Math.PI * 0.8) / Math.max(1, subsectionItems.length - 1)
     const startAngle = sectionAngle - (Math.PI * 0.4) // Começar 72 graus antes
 
     subsectionItems.forEach((subsection, subIndex) => {

@@ -78,7 +78,6 @@ export const parseMarkdown = (markdown) => {
   try {
     const headers = parseHeaders(markdown)
     const lists = parseList(markdown)
-    const lines = markdown.split('\n')
 
     if (headers.length === 0) {
       return {

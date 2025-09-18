@@ -50,7 +50,7 @@ export const calculateNodePositions = (nodes, config = {}) => {
   return positionedNodes
 }
 
-const positionLevelNodes = (levelNodes, level, rootNode, levelSpacing, nodeSpacing) => {
+const positionLevelNodes = (levelNodes, level, rootNode, levelSpacing, _nodeSpacing) => {
   const radius = level * levelSpacing
   const angleStep = (2 * Math.PI) / levelNodes.length
 

@@ -32,7 +32,6 @@ import themeManager from './theme/ThemeManager.js'
 // Import utilities
 import { parseMarkdown } from './utils/markdownParser.js'
 import { generateLayout } from './utils/mindMapGenerator.js'
-import exampleLoader from './utils/ExampleLoader.js'
 import MindMapRenderer from './utils/mindMapRenderer.js'
 import exportUtils from './utils/ExportUtils.js'
 
@@ -1016,7 +1015,8 @@ O Atomic Design é uma metodologia para criar sistemas de design escaláveis e r
   }
 
   handleBeforeUnload(event) {
-    if (this.editorPanel && this.editorPanel.textEditor && this.editorPanel.textEditor.isDirtyContent()) {
+    if (this.editorPanel && this.editorPanel.textEditor &&
+        this.editorPanel.textEditor.isDirtyContent()) {
       event.preventDefault()
       event.returnValue = ''
       return ''

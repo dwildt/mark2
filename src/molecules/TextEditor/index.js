@@ -246,7 +246,6 @@ class TextEditor {
   showError(message) {
     if (!this.statusElement) return
 
-    const originalText = this.statusElement.textContent
     this.statusElement.textContent = message
     this.statusElement.className = 'molecule-text-editor__status molecule-text-editor__status--error'
 
@@ -336,7 +335,8 @@ class TextEditor {
       newLineText = lineText.replace(/^ {2}/, '')
     }
 
-    const newValue = this.value.substring(0, lineStart) + newLineText + this.value.substring(lineEndPos)
+    const newValue = this.value.substring(0, lineStart) + newLineText +
+      this.value.substring(lineEndPos)
     this.setValue(newValue)
 
     // Restore cursor position

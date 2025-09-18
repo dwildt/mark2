@@ -107,7 +107,7 @@ class LanguageSelector {
     }
   }
 
-  handleLanguageChange(newLanguage, previousLanguage) {
+  handleLanguageChange(newLanguage, _previousLanguage) {
     this.currentLanguage = newLanguage
 
     if (this.selectElement) {

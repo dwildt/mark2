@@ -63,10 +63,7 @@ class ExportDialog {
       languageManager.t('export.mindmap.title'),
       languageManager.t('export.mindmap.description'),
       [
-        { key: 'svg', label: 'SVG', description: languageManager.t('export.formats.svg') },
-        { key: 'png', label: 'PNG', description: languageManager.t('export.formats.png') },
-        { key: 'jpg', label: 'JPG', description: languageManager.t('export.formats.jpg') },
-        { key: 'pdf', label: 'PDF', description: languageManager.t('export.formats.pdf') }
+        { key: 'svg', label: 'SVG', description: languageManager.t('export.formats.svg') }
       ]
     )
 

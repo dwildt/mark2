@@ -3,7 +3,6 @@
  * Interactive SVG-based mind map visualization
  */
 
-import Node from '../../atoms/Node/index.js'
 import languageManager from '../../i18n/LanguageManager.js'
 
 class MindMap {
@@ -479,7 +478,8 @@ class MindMap {
     event.preventDefault()
 
     const delta = -event.deltaY * 0.001
-    const newScale = Math.max(this.config.minZoom, Math.min(this.config.maxZoom, this.scale + delta))
+    const newScale = Math.max(this.config.minZoom,
+      Math.min(this.config.maxZoom, this.scale + delta))
 
     if (newScale !== this.scale) {
       this.scale = newScale

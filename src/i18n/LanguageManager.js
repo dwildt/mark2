@@ -357,7 +357,8 @@ class LanguageManager {
   }
 
   importLanguageSettings(settings) {
-    if (settings && settings.currentLanguage && this.isLanguageAvailable(settings.currentLanguage)) {
+    if (settings && settings.currentLanguage &&
+        this.isLanguageAvailable(settings.currentLanguage)) {
       this.setLanguage(settings.currentLanguage)
       return true
     }

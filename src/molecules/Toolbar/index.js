@@ -79,7 +79,7 @@ class Toolbar {
   }
 
   createLanguageSelector() {
-    const separator = this.addSeparator()
+    this.addSeparator()
 
     this.languageSelector = new LanguageSelector({
       compact: this.variant === 'compact' || this.variant === 'mobile',
