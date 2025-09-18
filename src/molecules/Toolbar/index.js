@@ -102,16 +102,16 @@ class Toolbar {
   getButtonText(key) {
     // Map action keys to translation keys
     const textMap = {
-      'theme': 'buttons.theme',
-      'export': 'buttons.export',
-      'help': 'buttons.help',
-      'clear': 'buttons.clear',
-      'example': 'buttons.example',
+      theme: 'buttons.theme',
+      export: 'buttons.export',
+      help: 'buttons.help',
+      clear: 'buttons.clear',
+      example: 'buttons.example',
       'zoom-in': 'buttons.zoomIn',
       'zoom-out': 'buttons.zoomOut',
       'fit-screen': 'buttons.fitScreen',
-      'save': 'buttons.save',
-      'settings': 'buttons.settings'
+      save: 'buttons.save',
+      settings: 'buttons.settings'
     }
 
     return languageManager.t(textMap[key] || `buttons.${key}`)
@@ -270,22 +270,22 @@ class Toolbar {
       let newIndex = currentIndex
 
       switch (event.key) {
-        case 'ArrowRight':
-        case 'ArrowDown':
-          newIndex = (currentIndex + 1) % buttons.length
-          break
-        case 'ArrowLeft':
-        case 'ArrowUp':
-          newIndex = currentIndex > 0 ? currentIndex - 1 : buttons.length - 1
-          break
-        case 'Home':
-          newIndex = 0
-          break
-        case 'End':
-          newIndex = buttons.length - 1
-          break
-        default:
-          return
+      case 'ArrowRight':
+      case 'ArrowDown':
+        newIndex = (currentIndex + 1) % buttons.length
+        break
+      case 'ArrowLeft':
+      case 'ArrowUp':
+        newIndex = currentIndex > 0 ? currentIndex - 1 : buttons.length - 1
+        break
+      case 'Home':
+        newIndex = 0
+        break
+      case 'End':
+        newIndex = buttons.length - 1
+        break
+      default:
+        return
       }
 
       event.preventDefault()

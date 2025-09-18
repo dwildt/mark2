@@ -175,7 +175,6 @@ export const parseMarkdown = (markdown) => {
       nodes: buildNodeStructure(root),
       error: null
     }
-
   } catch (error) {
     return {
       title: '',

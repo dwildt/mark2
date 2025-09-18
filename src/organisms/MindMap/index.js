@@ -193,8 +193,8 @@ class MindMap {
 
       const node = {
         id: `node-${nodeId++}`,
-        text: text,
-        level: level,
+        text,
+        level,
         children: [],
         parent: null
       }
@@ -511,8 +511,8 @@ class MindMap {
     if (this.nodes.size === 0) return
 
     // Calculate bounds of all nodes
-    let minX = Infinity, maxX = -Infinity
-    let minY = Infinity, maxY = -Infinity
+    let minX = Infinity; let maxX = -Infinity
+    let minY = Infinity; let maxY = -Infinity
 
     this.nodes.forEach(({ data }) => {
       minX = Math.min(minX, data.x - this.config.nodeWidth / 2)

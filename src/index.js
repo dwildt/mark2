@@ -108,7 +108,6 @@ class Mark2App {
 
       this.isInitialized = true
       console.log('mark2 application initialized successfully')
-
     } catch (error) {
       console.error('Failed to initialize mark2 application:', error)
       this.showError('Failed to initialize application: ' + error.message)
@@ -431,7 +430,6 @@ class Mark2App {
 
       // For now, just show a simple representation
       this.renderMindMapPlaceholder(parsedData)
-
     } catch (error) {
       console.error('Error generating mind map:', error)
       this.showMindMapError(error.message)
@@ -919,22 +917,22 @@ O Atomic Design é uma metodologia para criar sistemas de design escaláveis e r
     // Global shortcuts
     if ((event.ctrlKey || event.metaKey)) {
       switch (event.key) {
-        case ',':
+      case ',':
+        event.preventDefault()
+        this.handleHelp()
+        break
+      case 'e':
+        if (this.isMobile) {
           event.preventDefault()
-          this.handleHelp()
-          break
-        case 'e':
-          if (this.isMobile) {
-            event.preventDefault()
-            this.setMobileView('editor')
-          }
-          break
-        case 'm':
-          if (this.isMobile) {
-            event.preventDefault()
-            this.setMobileView('mindmap')
-          }
-          break
+          this.setMobileView('editor')
+        }
+        break
+      case 'm':
+        if (this.isMobile) {
+          event.preventDefault()
+          this.setMobileView('mindmap')
+        }
+        break
       }
     }
   }

@@ -333,7 +333,7 @@ class TextEditor {
       newLineText = '  ' + lineText
     } else {
       // Unindent
-      newLineText = lineText.replace(/^  /, '')
+      newLineText = lineText.replace(/^ {2}/, '')
     }
 
     const newValue = this.value.substring(0, lineStart) + newLineText + this.value.substring(lineEndPos)

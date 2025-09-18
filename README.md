@@ -24,12 +24,12 @@ A vanilla JavaScript application that converts markdown text into beautiful, int
 ## 🚀 Quick Start
 
 ### Online Version
-Visit [mark2 on GitHub Pages](https://your-username.github.io/mark2)
+Visit [mark2 on GitHub Pages](https://dwildt.github.io/mark2)
 
 ### Local Development
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/mark2.git
+git clone https://github.com/dwildt/mark2.git
 cd mark2
 
 # Install dependencies
@@ -144,8 +144,8 @@ MIT License - feel free to use this project for personal or commercial purposes.
 
 ## 🐛 Issues & Support
 
-- Report bugs: [GitHub Issues](https://github.com/your-username/mark2/issues)
-- Feature requests: [GitHub Discussions](https://github.com/your-username/mark2/discussions)
+- Report bugs: [GitHub Issues](https://github.com/dwildt/mark2/issues)
+- Feature requests: [GitHub Discussions](https://github.com/dwildt/mark2/discussions)
 - Documentation: Check the `tasks/` folder for detailed guides
 
 ## 🚀 Roadmap

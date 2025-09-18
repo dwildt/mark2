@@ -22,15 +22,15 @@ class MindMapRenderer {
       nodeSpacing: 300,
       levelSpacing: 280, // Aumentado para mais espaçamento
       itemSpacing: {
-        radial: 2.8,        // Distância radial para itens normais (aumentado para mais espaço)
-        bullet: 3.2,        // Distância específica para bullet points (aumentado para separar melhor)
-        vertical: 120,      // Espaçamento vertical entre bullet points (aumentado)
-        horizontal: 500,    // Distância horizontal da seção pai para bullets (aumentado)
-        minAngle: 0.5       // Ângulo mínimo entre itens radiais (aumentado para mais espaço)
+        radial: 2.8, // Distância radial para itens normais (aumentado para mais espaço)
+        bullet: 3.2, // Distância específica para bullet points (aumentado para separar melhor)
+        vertical: 120, // Espaçamento vertical entre bullet points (aumentado)
+        horizontal: 500, // Distância horizontal da seção pai para bullets (aumentado)
+        minAngle: 0.5 // Ângulo mínimo entre itens radiais (aumentado para mais espaço)
       },
       layout: {
-        bulletThreshold: 2,   // Número mínimo de bullets para usar layout vertical (reduzido)
-        collisionMargin: 30   // Margem de segurança para detecção de colisão (aumentado)
+        bulletThreshold: 2, // Número mínimo de bullets para usar layout vertical (reduzido)
+        collisionMargin: 30 // Margem de segurança para detecção de colisão (aumentado)
       },
       colors: {
         primary: '#2563eb',
@@ -180,7 +180,7 @@ class MindMapRenderer {
       })
 
       // Adicionar subsections e itens
-      let allItems = []
+      const allItems = []
 
       // Adicionar itens diretos da seção
       if (section.items && section.items.length > 0) {
@@ -309,7 +309,7 @@ class MindMapRenderer {
 
         // Adicionar itens da subsection
         if (item.items && item.items.length > 0) {
-          const subItemRadius = this.config.levelSpacing * 1.0  // Aumentado de 0.75 para 1.0
+          const subItemRadius = this.config.levelSpacing * 1.0 // Aumentado de 0.75 para 1.0
           const subItemAngleStep = (Math.PI * 1.2) / Math.max(item.items.length, 1) // Aumentado de 1.0 para 1.2
           const subBaseAngle = itemAngle - (subItemAngleStep * (item.items.length - 1)) / 2
 
@@ -339,7 +339,6 @@ class MindMapRenderer {
             })
           })
         }
-
       } else {
         // Criar nó para item direto
         const itemNode = {
@@ -468,7 +467,7 @@ class MindMapRenderer {
       const maxChars = node.type === 'root' ? 20 : node.type === 'section' ? 15 : 12
       if (node.text.length > maxChars) {
         const words = node.text.split(' ')
-        let lines = []
+        const lines = []
         let currentLine = ''
 
         words.forEach(word => {
@@ -596,8 +595,8 @@ class MindMapRenderer {
     if (this.nodes.length === 0) return
 
     // Calcular bounding box considerando o tamanho real dos nós
-    let minX = Infinity, maxX = -Infinity
-    let minY = Infinity, maxY = -Infinity
+    let minX = Infinity; let maxX = -Infinity
+    let minY = Infinity; let maxY = -Infinity
 
     this.nodes.forEach(node => {
       const halfWidth = (node.width || this.config.nodeWidth) / 2
