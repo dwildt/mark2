@@ -1,0 +1,251 @@
+/* ==========================================================================
+   Dark Theme
+   Dark mode theme for comfortable low-light usage
+   ========================================================================== */
+
+:root.theme-dark {
+  /* ==========================================================================
+     Background Colors
+     ========================================================================== */
+  --color-bg-primary: #0f172a;
+  --color-bg-secondary: #1e293b;
+  --color-bg-tertiary: #334155;
+  --color-bg-hover: #1e293b;
+  --color-bg-active: #334155;
+  --color-bg-disabled: #1e293b;
+
+  /* ==========================================================================
+     Text Colors
+     ========================================================================== */
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #cbd5e1;
+  --color-text-tertiary: #94a3b8;
+  --color-text-inverse: #0f172a;
+  --color-text-disabled: #64748b;
+  --color-text-accent: #60a5fa;
+  --color-text-error: #f87171;
+  --color-text-success: #4ade80;
+  --color-text-warning: #fbbf24;
+
+  /* ==========================================================================
+     Border Colors
+     ========================================================================== */
+  --color-border: #334155;
+  --color-border-light: #1e293b;
+  --color-border-dark: #475569;
+  --color-border-accent: #60a5fa;
+  --color-focus: #60a5fa;
+  --color-selection: rgba(96, 165, 250, 0.2);
+
+  /* ==========================================================================
+     Mind Map Node Colors (Hierarchical)
+     ========================================================================== */
+  --color-node-level-1: #f8fafc;      /* Root nodes - lightest */
+  --color-node-level-2: #cbd5e1;      /* Second level */
+  --color-node-level-3: #94a3b8;      /* Third level */
+  --color-node-level-4: #64748b;      /* Fourth level */
+  --color-node-level-5: #475569;      /* Fifth level and beyond - darkest */
+
+  /* Node Background Colors */
+  --color-node-bg-level-1: #1e293b;
+  --color-node-bg-level-2: #334155;
+  --color-node-bg-level-3: #475569;
+  --color-node-bg-level-4: #334155;
+  --color-node-bg-level-5: #1e293b;
+
+  /* Node Border Colors */
+  --color-node-border-level-1: #f8fafc;
+  --color-node-border-level-2: #cbd5e1;
+  --color-node-border-level-3: #94a3b8;
+  --color-node-border-level-4: #64748b;
+  --color-node-border-level-5: #475569;
+
+  /* ==========================================================================
+     Node Interactive States
+     ========================================================================== */
+  --color-node-hover: rgba(96, 165, 250, 0.15);
+  --color-node-selected: rgba(96, 165, 250, 0.25);
+  --color-node-text: var(--color-text-primary);
+
+  /* ==========================================================================
+     Connection Lines
+     ========================================================================== */
+  --color-connection: #475569;
+  --color-connection-hover: #64748b;
+  --color-connection-selected: #94a3b8;
+
+  /* ==========================================================================
+     Status and Feedback Colors
+     ========================================================================== */
+  --color-error: #1f1717;
+  --color-error-border: #3f2121;
+  --color-warning: #1f1b13;
+  --color-warning-border: #3f3426;
+  --color-success: #14191a;
+  --color-success-border: #1a2e05;
+  --color-info: #0f1629;
+  --color-info-border: #1e3a5f;
+
+  /* ==========================================================================
+     Component Specific Colors
+     ========================================================================== */
+
+  /* Header */
+  --color-header-bg: var(--color-bg-secondary);
+  --color-header-border: var(--color-border);
+  --color-header-text: var(--color-text-primary);
+
+  /* Sidebar/Editor Panel */
+  --color-sidebar-bg: var(--color-bg-primary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Modal */
+  --color-modal-bg: var(--color-bg-secondary);
+  --color-modal-backdrop: rgba(0, 0, 0, 0.7);
+  --color-modal-border: var(--color-border);
+
+  /* Form Elements */
+  --color-input-bg: var(--color-bg-tertiary);
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-focus);
+  --color-input-placeholder: var(--color-text-tertiary);
+
+  /* Buttons */
+  --color-button-primary-bg: var(--color-text-accent);
+  --color-button-primary-text: var(--color-text-inverse);
+  --color-button-primary-hover: #3b82f6;
+
+  --color-button-secondary-bg: var(--color-bg-tertiary);
+  --color-button-secondary-text: var(--color-text-primary);
+  --color-button-secondary-hover: var(--color-bg-active);
+
+  --color-button-ghost-bg: transparent;
+  --color-button-ghost-text: var(--color-text-secondary);
+  --color-button-ghost-hover: var(--color-bg-hover);
+
+  /* Loading States */
+  --color-loading-bg: var(--color-bg-secondary);
+  --color-loading-text: var(--color-text-secondary);
+  --color-spinner: var(--color-text-accent);
+
+  /* ==========================================================================
+     Theme Preview Colors (for theme selector)
+     ========================================================================== */
+  --theme-preview-primary: #0f172a;
+  --theme-preview-secondary: #1e293b;
+  --theme-preview-accent: #60a5fa;
+  --theme-preview-text: #f8fafc;
+}
+
+/* ==========================================================================
+   Dark Theme Specific Adjustments
+   ========================================================================== */
+
+.theme-dark {
+  color-scheme: dark;
+}
+
+/* Enhanced focus states for dark theme */
+.theme-dark .atom-button:focus,
+.theme-dark .atom-text-input:focus {
+  outline-color: var(--color-focus);
+  box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.2);
+}
+
+/* Reduce harsh shadows in dark theme */
+.theme-dark .molecule-modal__content {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.theme-dark .organism-header {
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+/* Enhance text contrast for better readability */
+.theme-dark .atom-text-input {
+  color: var(--color-text-primary);
+  background-color: var(--color-input-bg);
+}
+
+.theme-dark .atom-text-input::placeholder {
+  color: var(--color-text-tertiary);
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Dark Theme Scrollbar Styling
+   ========================================================================== */
+.theme-dark ::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.theme-dark ::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+.theme-dark ::-webkit-scrollbar-thumb {
+  background: var(--color-border-dark);
+  border-radius: var(--border-radius);
+}
+
+.theme-dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-tertiary);
+}
+
+/* ==========================================================================
+   Dark Theme Selection Styles
+   ========================================================================== */
+.theme-dark ::selection {
+  background-color: var(--color-selection);
+  color: var(--color-text-primary);
+}
+
+.theme-dark ::-moz-selection {
+  background-color: var(--color-selection);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   Dark Theme Image Adjustments
+   ========================================================================== */
+.theme-dark img {
+  opacity: 0.9;
+}
+
+.theme-dark img:hover {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Dark Theme Code/Monospace Adjustments
+   ========================================================================== */
+.theme-dark code,
+.theme-dark pre {
+  background-color: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   Print Styles for Dark Theme (convert to light for printing)
+   ========================================================================== */
+@media print {
+  .theme-dark {
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #ffffff;
+    --color-text-primary: #000000;
+    --color-text-secondary: #333333;
+    --color-border: #cccccc;
+    --color-node-level-1: #000000;
+    --color-node-level-2: #333333;
+    --color-node-level-3: #666666;
+    --color-node-level-4: #999999;
+    --color-node-level-5: #cccccc;
+    --shadow: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-xl: none;
+  }
+}

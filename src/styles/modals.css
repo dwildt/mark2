@@ -1,0 +1,469 @@
+/**
+ * Modal Styles
+ * Styles for theme and help modals
+ */
+
+/* Modal Base Styles */
+.molecule-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.molecule-modal[aria-hidden="false"] {
+  display: flex;
+}
+
+.molecule-modal__backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.molecule-modal__content {
+  position: relative;
+  background: var(--color-background, #ffffff);
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow: hidden;
+  border: 1px solid var(--color-border, #e5e7eb);
+}
+
+.molecule-modal__header {
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.molecule-modal__header h3 {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #1f2937);
+}
+
+.molecule-modal__body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  max-height: calc(85vh - 120px);
+}
+
+/* Help Modal Tab Styles */
+.help-tabs {
+  display: flex;
+  border-bottom: 2px solid var(--color-border, #e5e7eb);
+  margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+  padding: 0 1.5rem;
+  background: var(--color-background, #ffffff);
+}
+
+.help-tabs__button {
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  color: var(--color-text-secondary, #6b7280);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.help-tabs__button:hover {
+  color: var(--color-text-primary, #1f2937);
+  background-color: var(--color-background-hover, #f9fafb);
+}
+
+.help-tabs__button.active {
+  color: var(--color-accent, #3b82f6);
+  border-bottom-color: var(--color-accent, #3b82f6);
+  background-color: var(--color-selection, rgba(59, 130, 246, 0.05));
+}
+
+.help-tab-content {
+  display: none;
+}
+
+.help-tab-content.active {
+  display: block;
+}
+
+/* Theme Selector Styles */
+.molecule-theme-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 0.75rem;
+}
+
+/* Language Selector Styles */
+.molecule-language-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.atom-theme-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.atom-theme-option:hover {
+  background-color: var(--color-background-hover, #f3f4f6);
+}
+
+.atom-theme-option input[type="radio"] {
+  display: none;
+}
+
+.atom-theme-option input[type="radio"]:checked + .atom-theme-option__preview {
+  transform: scale(1.1);
+  box-shadow: 0 0 0 2px var(--color-accent, #3b82f6);
+}
+
+.atom-theme-option input[type="radio"]:checked ~ .atom-theme-option__label {
+  color: var(--color-accent, #3b82f6);
+  font-weight: 600;
+}
+
+.atom-theme-option__preview {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+  border: 2px solid var(--color-border, #e5e7eb);
+  position: relative;
+  overflow: hidden;
+}
+
+.atom-theme-option__preview::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+}
+
+/* Theme Preview Colors */
+.atom-theme-option__preview--light {
+  background: #ffffff;
+}
+
+.atom-theme-option__preview--light::before {
+  background: linear-gradient(135deg, #ffffff 50%, #f8f9fa 50%);
+}
+
+.atom-theme-option__preview--dark {
+  background: #0f172a;
+}
+
+.atom-theme-option__preview--dark::before {
+  background: linear-gradient(135deg, #0f172a 50%, #1e293b 50%);
+}
+
+.atom-theme-option__preview--blue {
+  background: #eff6ff;
+}
+
+.atom-theme-option__preview--blue::before {
+  background: linear-gradient(135deg, #eff6ff 50%, #3b82f6 50%);
+}
+
+.atom-theme-option__preview--green {
+  background: #f0fdf4;
+}
+
+.atom-theme-option__preview--green::before {
+  background: linear-gradient(135deg, #f0fdf4 50%, #10b981 50%);
+}
+
+.atom-theme-option__preview--orange {
+  background: #fff7ed;
+}
+
+.atom-theme-option__preview--orange::before {
+  background: linear-gradient(135deg, #fff7ed 50%, #f97316 50%);
+}
+
+.atom-theme-option__label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary, #6b7280);
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+/* Language Option Styles */
+.atom-language-option {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  padding: 0.75rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.atom-language-option:hover {
+  background-color: var(--color-bg-hover, #f3f4f6);
+}
+
+.atom-language-option input[type="radio"] {
+  display: none;
+}
+
+.atom-language-option input[type="radio"]:checked ~ .atom-language-option__flag {
+  transform: scale(1.1);
+}
+
+.atom-language-option input[type="radio"]:checked ~ .atom-language-option__label {
+  color: var(--color-text-accent, #3b82f6);
+  font-weight: 600;
+}
+
+.atom-language-option input[type="radio"]:checked {
+  border-color: var(--color-accent, #3b82f6);
+}
+
+.atom-language-option__flag {
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.atom-language-option__label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+/* Export Modal Styles */
+.export-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.export-format-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.export-format-option {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  border: 2px solid var(--color-border);
+}
+
+.export-format-option:hover {
+  background-color: var(--color-bg-hover, #f3f4f6);
+  border-color: var(--color-border-dark, #d1d5db);
+}
+
+.export-format-option input[type="radio"] {
+  display: none;
+}
+
+.export-format-option input[type="radio"]:checked {
+  + .export-format-icon {
+    transform: scale(1.1);
+  }
+}
+
+.export-format-option input[type="radio"]:checked ~ .export-format-info .export-format-title {
+  color: var(--color-text-accent, #3b82f6);
+  font-weight: 600;
+}
+
+.export-format-option input[type="radio"]:checked {
+  border-color: var(--color-accent, #3b82f6);
+  background-color: var(--color-selection, rgba(59, 130, 246, 0.1));
+}
+
+.export-format-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.export-format-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.export-format-title {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+}
+
+.export-format-description {
+  font-size: 0.75rem;
+  color: var(--color-text-tertiary);
+  line-height: 1.4;
+}
+
+.export-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+/* Help Content Styles */
+.help-content {
+  line-height: 1.6;
+}
+
+.help-content p {
+  margin-bottom: 1rem;
+  color: var(--color-text-primary, #1f2937);
+}
+
+.help-content ul {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+}
+
+.help-content li {
+  margin-bottom: 0.5rem;
+  color: var(--color-text-secondary, #6b7280);
+}
+
+.help-content code {
+  background-color: var(--color-background-secondary, #f8f9fa);
+  padding: 0.125rem 0.25rem;
+  border-radius: 4px;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.875em;
+  color: var(--color-text-accent, #3b82f6);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .molecule-modal__content {
+    margin: 1rem;
+    max-width: none;
+    max-height: 90vh;
+  }
+
+  .molecule-modal__header,
+  .molecule-modal__body {
+    padding: 1rem;
+  }
+
+  .molecule-modal__body {
+    max-height: calc(90vh - 100px);
+  }
+
+  .help-tabs {
+    margin: -1rem -1rem 1rem -1rem;
+    padding: 0 1rem;
+  }
+
+  .help-tabs__button {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .molecule-theme-selector {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .molecule-modal__content {
+    max-width: 500px;
+  }
+}
+
+/* Animation */
+.molecule-modal[aria-hidden="false"] {
+  animation: modalFadeIn 0.2s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.molecule-modal[aria-hidden="false"] .molecule-modal__content {
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    transform: translateY(-20px) scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Focus Styles */
+.atom-theme-option:focus-within {
+  outline: 2px solid var(--color-focus, #3b82f6);
+  outline-offset: 2px;
+}
+
+/* Dark Theme Adjustments */
+.theme-dark .molecule-modal__backdrop {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.theme-dark .molecule-modal__content {
+  background: var(--color-bg-secondary, #1e293b);
+  border-color: var(--color-border, #334155);
+}
+
+.theme-dark .molecule-modal__header {
+  border-color: var(--color-border, #334155);
+}
+
+.theme-dark .atom-theme-option:hover {
+  background-color: var(--color-bg-hover, #334155);
+}

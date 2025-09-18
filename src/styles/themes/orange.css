@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Orange Theme
+   Energetic orange palette for creative and warm environments
+   ========================================================================== */
+
+:root.theme-orange {
+  /* ==========================================================================
+     Background Colors
+     ========================================================================== */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #fff7ed;
+  --color-bg-tertiary: #fed7aa;
+  --color-bg-hover: #fff7ed;
+  --color-bg-active: #fed7aa;
+  --color-bg-disabled: #f8fafc;
+
+  /* ==========================================================================
+     Text Colors
+     ========================================================================== */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #c2410c;
+  --color-text-tertiary: #ea580c;
+  --color-text-inverse: #ffffff;
+  --color-text-disabled: #94a3b8;
+  --color-text-accent: #d97706;
+  --color-text-error: #dc2626;
+  --color-text-success: #16a34a;
+  --color-text-warning: #d97706;
+
+  /* ==========================================================================
+     Border Colors
+     ========================================================================== */
+  --color-border: #fed7aa;
+  --color-border-light: #fff7ed;
+  --color-border-dark: #fb923c;
+  --color-border-accent: #d97706;
+  --color-focus: #d97706;
+  --color-selection: rgba(217, 119, 6, 0.15);
+
+  /* ==========================================================================
+     Mind Map Node Colors (Orange Hierarchy)
+     ========================================================================== */
+  --color-node-level-1: #9a3412;      /* Root nodes - darkest orange */
+  --color-node-level-2: #c2410c;      /* Second level */
+  --color-node-level-3: #d97706;      /* Third level */
+  --color-node-level-4: #ea580c;      /* Fourth level */
+  --color-node-level-5: #f97316;      /* Fifth level and beyond - lightest orange */
+
+  /* Node Background Colors */
+  --color-node-bg-level-1: #ffffff;
+  --color-node-bg-level-2: #fff7ed;
+  --color-node-bg-level-3: #fed7aa;
+  --color-node-bg-level-4: #fed7aa;
+  --color-node-bg-level-5: #fff7ed;
+
+  /* Node Border Colors */
+  --color-node-border-level-1: #9a3412;
+  --color-node-border-level-2: #c2410c;
+  --color-node-border-level-3: #d97706;
+  --color-node-border-level-4: #ea580c;
+  --color-node-border-level-5: #f97316;
+
+  /* ==========================================================================
+     Node Interactive States
+     ========================================================================== */
+  --color-node-hover: rgba(217, 119, 6, 0.1);
+  --color-node-selected: rgba(217, 119, 6, 0.2);
+  --color-node-text: var(--color-text-primary);
+
+  /* ==========================================================================
+     Connection Lines
+     ========================================================================== */
+  --color-connection: #fb923c;
+  --color-connection-hover: #f97316;
+  --color-connection-selected: #ea580c;
+
+  /* ==========================================================================
+     Status and Feedback Colors
+     ========================================================================== */
+  --color-error: #fef2f2;
+  --color-error-border: #fecaca;
+  --color-warning: #fff7ed;
+  --color-warning-border: #fed7aa;
+  --color-success: #f0fdf4;
+  --color-success-border: #bbf7d0;
+  --color-info: #fff7ed;
+  --color-info-border: #fed7aa;
+
+  /* ==========================================================================
+     Component Specific Colors
+     ========================================================================== */
+
+  /* Header */
+  --color-header-bg: var(--color-bg-primary);
+  --color-header-border: var(--color-border);
+  --color-header-text: var(--color-text-primary);
+
+  /* Sidebar/Editor Panel */
+  --color-sidebar-bg: var(--color-bg-secondary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Modal */
+  --color-modal-bg: var(--color-bg-primary);
+  --color-modal-backdrop: rgba(194, 65, 12, 0.5);
+  --color-modal-border: var(--color-border);
+
+  /* Form Elements */
+  --color-input-bg: var(--color-bg-primary);
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-focus);
+  --color-input-placeholder: var(--color-text-tertiary);
+
+  /* Buttons */
+  --color-button-primary-bg: var(--color-text-accent);
+  --color-button-primary-text: var(--color-text-inverse);
+  --color-button-primary-hover: #b45309;
+
+  --color-button-secondary-bg: var(--color-bg-tertiary);
+  --color-button-secondary-text: var(--color-text-secondary);
+  --color-button-secondary-hover: var(--color-bg-active);
+
+  --color-button-ghost-bg: transparent;
+  --color-button-ghost-text: var(--color-text-secondary);
+  --color-button-ghost-hover: var(--color-bg-hover);
+
+  /* Loading States */
+  --color-loading-bg: var(--color-bg-secondary);
+  --color-loading-text: var(--color-text-secondary);
+  --color-spinner: var(--color-text-accent);
+
+  /* ==========================================================================
+     Theme Preview Colors (for theme selector)
+     ========================================================================== */
+  --theme-preview-primary: #ffffff;
+  --theme-preview-secondary: #fed7aa;
+  --theme-preview-accent: #d97706;
+  --theme-preview-text: #9a3412;
+}
+
+/* ==========================================================================
+   Orange Theme Specific Adjustments
+   ========================================================================== */
+
+.theme-orange {
+  color-scheme: light;
+}
+
+/* Enhanced focus states for orange theme */
+.theme-orange .atom-button:focus,
+.theme-orange .atom-text-input:focus {
+  outline-color: var(--color-focus);
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.1);
+}
+
+/* Orange theme shadows with warm glow */
+.theme-orange .molecule-modal__content {
+  box-shadow: var(--shadow-xl), 0 0 20px rgba(217, 119, 6, 0.1);
+}
+
+.theme-orange .organism-header {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Orange theme gradients for energetic feel */
+.theme-orange .mind-map-node--level-1 {
+  background: linear-gradient(135deg, #ffffff 0%, #fff7ed 100%);
+}
+
+.theme-orange .mind-map-node--level-2 {
+  background: linear-gradient(135deg, #fff7ed 0%, #fed7aa 100%);
+}
+
+/* Energetic hover effects */
+.theme-orange .mind-map-node:hover {
+  transform: scale(1.02);
+  transition: transform var(--transition-fast);
+}
+
+.theme-orange .atom-button:hover {
+  transform: translateY(-1px);
+  transition: transform var(--transition-fast);
+}
+
+/* Warm glow effect for interactive elements */
+.theme-orange .atom-button--primary:hover {
+  box-shadow: 0 4px 12px rgba(217, 119, 6, 0.3);
+}
+
+/* ==========================================================================
+   Print Styles for Orange Theme
+   ========================================================================== */
+@media print {
+  .theme-orange {
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #ffffff;
+    --color-text-primary: #000000;
+    --color-text-secondary: #9a3412;
+    --color-border: #fb923c;
+    --shadow: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-xl: none;
+  }
+}

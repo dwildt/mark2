@@ -1,0 +1,180 @@
+/* ==========================================================================
+   Light Theme
+   Default theme with white background, black text, and gray accents
+   ========================================================================== */
+
+:root.theme-light {
+  /* ==========================================================================
+     Background Colors
+     ========================================================================== */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f8fafc;
+  --color-bg-tertiary: #f1f5f9;
+  --color-bg-hover: #f8fafc;
+  --color-bg-active: #e2e8f0;
+  --color-bg-disabled: #f8fafc;
+
+  /* ==========================================================================
+     Text Colors
+     ========================================================================== */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #475569;
+  --color-text-tertiary: #64748b;
+  --color-text-inverse: #ffffff;
+  --color-text-disabled: #cbd5e1;
+  --color-text-accent: #3b82f6;
+  --color-text-error: #dc2626;
+  --color-text-success: #16a34a;
+  --color-text-warning: #d97706;
+
+  /* ==========================================================================
+     Border Colors
+     ========================================================================== */
+  --color-border: #e2e8f0;
+  --color-border-light: #f1f5f9;
+  --color-border-dark: #cbd5e1;
+  --color-border-accent: #3b82f6;
+  --color-focus: #3b82f6;
+  --color-selection: rgba(59, 130, 246, 0.1);
+
+  /* ==========================================================================
+     Mind Map Node Colors (Hierarchical)
+     ========================================================================== */
+  --color-node-level-1: #1e293b;      /* Root nodes - darkest */
+  --color-node-level-2: #475569;      /* Second level */
+  --color-node-level-3: #64748b;      /* Third level */
+  --color-node-level-4: #94a3b8;      /* Fourth level */
+  --color-node-level-5: #cbd5e1;      /* Fifth level and beyond - lightest */
+
+  /* Node Background Colors */
+  --color-node-bg-level-1: #ffffff;
+  --color-node-bg-level-2: #f8fafc;
+  --color-node-bg-level-3: #f1f5f9;
+  --color-node-bg-level-4: #f1f5f9;
+  --color-node-bg-level-5: #f8fafc;
+
+  /* Node Border Colors */
+  --color-node-border-level-1: #1e293b;
+  --color-node-border-level-2: #475569;
+  --color-node-border-level-3: #64748b;
+  --color-node-border-level-4: #94a3b8;
+  --color-node-border-level-5: #cbd5e1;
+
+  /* ==========================================================================
+     Node Interactive States
+     ========================================================================== */
+  --color-node-hover: rgba(59, 130, 246, 0.08);
+  --color-node-selected: rgba(59, 130, 246, 0.15);
+  --color-node-text: var(--color-text-primary);
+
+  /* ==========================================================================
+     Connection Lines
+     ========================================================================== */
+  --color-connection: #cbd5e1;
+  --color-connection-hover: #94a3b8;
+  --color-connection-selected: #64748b;
+
+  /* ==========================================================================
+     Status and Feedback Colors
+     ========================================================================== */
+  --color-error: #fef2f2;
+  --color-error-border: #fecaca;
+  --color-warning: #fffbeb;
+  --color-warning-border: #fed7aa;
+  --color-success: #f0fdf4;
+  --color-success-border: #bbf7d0;
+  --color-info: #eff6ff;
+  --color-info-border: #bfdbfe;
+
+  /* ==========================================================================
+     Component Specific Colors
+     ========================================================================== */
+
+  /* Header */
+  --color-header-bg: var(--color-bg-primary);
+  --color-header-border: var(--color-border);
+  --color-header-text: var(--color-text-primary);
+
+  /* Sidebar/Editor Panel */
+  --color-sidebar-bg: var(--color-bg-secondary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Modal */
+  --color-modal-bg: var(--color-bg-primary);
+  --color-modal-backdrop: rgba(15, 23, 42, 0.5);
+  --color-modal-border: var(--color-border);
+
+  /* Form Elements */
+  --color-input-bg: var(--color-bg-primary);
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-focus);
+  --color-input-placeholder: var(--color-text-tertiary);
+
+  /* Buttons */
+  --color-button-primary-bg: var(--color-text-accent);
+  --color-button-primary-text: var(--color-text-inverse);
+  --color-button-primary-hover: #2563eb;
+
+  --color-button-secondary-bg: var(--color-bg-tertiary);
+  --color-button-secondary-text: var(--color-text-primary);
+  --color-button-secondary-hover: var(--color-bg-active);
+
+  --color-button-ghost-bg: transparent;
+  --color-button-ghost-text: var(--color-text-secondary);
+  --color-button-ghost-hover: var(--color-bg-hover);
+
+  /* Loading States */
+  --color-loading-bg: var(--color-bg-secondary);
+  --color-loading-text: var(--color-text-secondary);
+  --color-spinner: var(--color-text-accent);
+
+  /* ==========================================================================
+     Theme Preview Colors (for theme selector)
+     ========================================================================== */
+  --theme-preview-primary: #ffffff;
+  --theme-preview-secondary: #f1f5f9;
+  --theme-preview-accent: #3b82f6;
+  --theme-preview-text: #0f172a;
+}
+
+/* ==========================================================================
+   Light Theme Specific Adjustments
+   ========================================================================== */
+
+.theme-light {
+  color-scheme: light;
+}
+
+/* Ensure proper contrast for interactive elements */
+.theme-light .atom-button:focus,
+.theme-light .atom-text-input:focus {
+  outline-color: var(--color-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Enhance shadows in light theme */
+.theme-light .molecule-modal__content {
+  box-shadow: var(--shadow-xl);
+}
+
+.theme-light .organism-header {
+  box-shadow: var(--shadow-sm);
+}
+
+/* ==========================================================================
+   Print Styles for Light Theme
+   ========================================================================== */
+@media print {
+  .theme-light {
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #ffffff;
+    --color-text-primary: #000000;
+    --color-text-secondary: #333333;
+    --color-border: #cccccc;
+    --shadow: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-xl: none;
+  }
+}

@@ -1,0 +1,392 @@
+/* ==========================================================================
+   Header Organism Styles
+   Main application header with title and navigation
+   ========================================================================== */
+
+.organism-header {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: var(--header-height);
+
+  /* Styling */
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-header-border);
+  box-shadow: var(--shadow-sm);
+
+  /* Positioning */
+  position: relative;
+  z-index: var(--z-index-dropdown);
+  flex-shrink: 0;
+}
+
+.organism-header__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  gap: var(--spacing-lg);
+}
+
+/* ==========================================================================
+   Title Section
+   ========================================================================== */
+
+.organism-header__title-section {
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Allow text truncation */
+}
+
+.organism-header__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-header-text);
+  margin: 0;
+  line-height: var(--line-height-tight);
+
+  /* Text overflow handling */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.organism-header__subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin: 0;
+  line-height: var(--line-height-tight);
+
+  /* Text overflow handling */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ==========================================================================
+   Toolbar Integration
+   ========================================================================== */
+
+.organism-header__toolbar {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Header States
+   ========================================================================== */
+
+/* Loading State */
+.organism-header--loading {
+  opacity: 0.8;
+}
+
+.organism-header--loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: var(--spacing-lg);
+  width: 16px;
+  height: 16px;
+  margin-top: -8px;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-text-accent);
+  border-radius: 50%;
+  animation: headerSpin 1s linear infinite;
+}
+
+@keyframes headerSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   Mobile Responsive
+   ========================================================================== */
+
+.organism-header--mobile .organism-header__container {
+  padding: 0 var(--spacing-md);
+  gap: var(--spacing-md);
+}
+
+.organism-header--mobile .organism-header__title {
+  font-size: var(--font-size-lg);
+}
+
+.organism-header--mobile .organism-header__subtitle {
+  display: none; /* Hide subtitle on mobile to save space */
+}
+
+/* ==========================================================================
+   Animation Effects
+   ========================================================================== */
+
+/* Slide in from top */
+.organism-header--animate-in {
+  animation: headerSlideIn 0.5s var(--animation-ease-out);
+}
+
+@keyframes headerSlideIn {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .organism-header__container {
+    padding: 0 var(--spacing-md);
+  }
+
+  .organism-header__title {
+    font-size: var(--font-size-lg);
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .organism-header {
+    height: calc(var(--header-height) - 10px);
+  }
+
+  .organism-header__container {
+    padding: 0 var(--spacing-md);
+    gap: var(--spacing-sm);
+  }
+
+  .organism-header__title {
+    font-size: var(--font-size-base);
+  }
+
+  .organism-header__subtitle {
+    display: none;
+  }
+
+  /* Adjust toolbar for mobile */
+  .organism-header__toolbar .molecule-toolbar {
+    gap: var(--spacing-xs);
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .organism-header__container {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .organism-header__title {
+    font-size: var(--font-size-sm);
+    max-width: 120px;
+  }
+}
+
+/* ==========================================================================
+   Theme Specific Adjustments
+   ========================================================================== */
+
+/* Dark Theme */
+.theme-dark .organism-header {
+  background-color: var(--color-header-bg);
+  border-bottom-color: var(--color-header-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Blue Theme */
+.theme-blue .organism-header {
+  background: linear-gradient(135deg, var(--color-header-bg) 0%, var(--color-bg-secondary) 100%);
+}
+
+/* Green Theme */
+.theme-green .organism-header {
+  background: linear-gradient(135deg, var(--color-header-bg) 0%, var(--color-bg-secondary) 100%);
+}
+
+/* Orange Theme */
+.theme-orange .organism-header {
+  background: linear-gradient(135deg, var(--color-header-bg) 0%, var(--color-bg-secondary) 100%);
+}
+
+/* ==========================================================================
+   Focus Management
+   ========================================================================== */
+
+.organism-header:focus-within {
+  outline: none;
+}
+
+.organism-header__title:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+  border-radius: var(--border-radius-sm);
+}
+
+/* ==========================================================================
+   High Contrast Mode
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  .organism-header {
+    border-bottom-width: 2px;
+    box-shadow: none;
+  }
+
+  .organism-header__title {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .organism-header--animate-in {
+    animation: none;
+  }
+
+  .organism-header--loading::after {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .organism-header {
+    background: white !important;
+    color: black !important;
+    border-bottom: 2px solid black !important;
+    box-shadow: none !important;
+    position: static;
+  }
+
+  .organism-header__toolbar {
+    display: none;
+  }
+
+  .organism-header__subtitle {
+    display: block;
+    color: black !important;
+  }
+}
+
+/* ==========================================================================
+   Sticky Header (if needed)
+   ========================================================================== */
+
+.organism-header--sticky {
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.organism-header--sticky.theme-light {
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.organism-header--sticky.theme-dark {
+  background-color: rgba(15, 23, 42, 0.9);
+}
+
+/* ==========================================================================
+   Header Variants
+   ========================================================================== */
+
+/* Compact Header */
+.organism-header--compact {
+  height: calc(var(--header-height) - 20px);
+}
+
+.organism-header--compact .organism-header__title {
+  font-size: var(--font-size-lg);
+}
+
+.organism-header--compact .organism-header__subtitle {
+  font-size: var(--font-size-xs);
+}
+
+/* Minimal Header */
+.organism-header--minimal {
+  border-bottom: none;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+.organism-header--minimal .organism-header__container {
+  padding: var(--spacing-sm) var(--spacing-lg);
+}
+
+/* ==========================================================================
+   Logo/Icon Support
+   ========================================================================== */
+
+.organism-header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-right: var(--spacing-md);
+}
+
+.organism-header__logo-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.organism-header__logo-text {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-header-text);
+  text-decoration: none;
+}
+
+.organism-header__logo-text:hover {
+  color: var(--color-text-accent);
+}
+
+/* ==========================================================================
+   Breadcrumb Support
+   ========================================================================== */
+
+.organism-header__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+.organism-header__breadcrumb-separator {
+  color: var(--color-text-tertiary);
+}
+
+.organism-header__breadcrumb-link {
+  color: var(--color-text-accent);
+  text-decoration: none;
+}
+
+.organism-header__breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.organism-header__breadcrumb-current {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+}

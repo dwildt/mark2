@@ -1,0 +1,213 @@
+/**
+ * Mind Map Visualization Styles
+ */
+
+.mind-map-container {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-background, #ffffff);
+  border: 1px solid var(--color-border, #e5e7eb);
+  border-radius: 8px;
+}
+
+.mind-map-container svg {
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  user-select: none;
+}
+
+.mind-map-container svg:active {
+  cursor: grabbing;
+}
+
+/* Node styles */
+.mind-map-node {
+  transition: all 0.2s ease;
+}
+
+.mind-map-node:hover {
+  opacity: 0.9 !important;
+  transform: scale(1.02);
+}
+
+.mind-map-node--root {
+  font-weight: bold;
+}
+
+.mind-map-node--section {
+  font-weight: 500;
+}
+
+.mind-map-node--item {
+  font-weight: normal;
+}
+
+/* Connection lines */
+.mind-map-connection {
+  transition: stroke-opacity 0.2s ease;
+}
+
+.mind-map-connection:hover {
+  stroke-opacity: 1 !important;
+}
+
+/* Loading, empty, and error states */
+.mind-map-loading,
+.mind-map-empty,
+.mind-map-error {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+  background: var(--color-background-secondary, #f8f9fa);
+  border: 1px solid var(--color-border, #e5e7eb);
+  max-width: 400px;
+}
+
+.mind-map-loading {
+  color: var(--color-text-secondary, #6b7280);
+}
+
+.mind-map-empty {
+  color: var(--color-text-secondary, #6b7280);
+}
+
+.mind-map-error {
+  color: var(--color-error, #dc2626);
+  background: var(--color-error-light, #fef2f2);
+  border-color: var(--color-error, #dc2626);
+}
+
+/* Controls styling */
+.organism-mind-map__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  background: var(--color-background-secondary, #f8f9fa);
+}
+
+.organism-mind-map__title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text-primary, #1f2937);
+}
+
+.molecule-toolbar--compact {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.molecule-toolbar--compact .atom-button {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  border: 1px solid var(--color-border, #e5e7eb);
+  background: var(--color-background, #ffffff);
+  color: var(--color-text-primary, #374151);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.molecule-toolbar--compact .atom-button:hover {
+  background: var(--color-background-hover, #f3f4f6);
+  border-color: var(--color-border-hover, #d1d5db);
+}
+
+.molecule-toolbar--compact .atom-button:active {
+  transform: translateY(1px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .mind-map-container {
+    min-height: 300px;
+  }
+
+  .organism-mind-map__header {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .organism-mind-map__title {
+    font-size: 1.125rem;
+  }
+
+  .molecule-toolbar--compact {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .molecule-toolbar--compact .atom-button {
+    flex: 1;
+    max-width: 80px;
+    padding: 0.375rem 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* Animation keyframes */
+@keyframes nodeAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes connectionDraw {
+  from {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+  }
+  to {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Dark theme support */
+.theme-dark .mind-map-container {
+  background: var(--color-background-dark, #1f2937);
+  border-color: var(--color-border-dark, #374151);
+}
+
+.theme-dark .mind-map-loading,
+.theme-dark .mind-map-empty {
+  background: var(--color-background-secondary-dark, #374151);
+  border-color: var(--color-border-dark, #4b5563);
+  color: var(--color-text-secondary-dark, #9ca3af);
+}
+
+.theme-dark .organism-mind-map__header {
+  background: var(--color-background-secondary-dark, #374151);
+  border-color: var(--color-border-dark, #4b5563);
+}
+
+.theme-dark .organism-mind-map__title {
+  color: var(--color-text-primary-dark, #f9fafb);
+}
+
+.theme-dark .molecule-toolbar--compact .atom-button {
+  background: var(--color-background-dark, #1f2937);
+  border-color: var(--color-border-dark, #4b5563);
+  color: var(--color-text-primary-dark, #e5e7eb);
+}
+
+.theme-dark .molecule-toolbar--compact .atom-button:hover {
+  background: var(--color-background-hover-dark, #374151);
+  border-color: var(--color-border-hover-dark, #6b7280);
+}

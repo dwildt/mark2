@@ -1,0 +1,383 @@
+/* ==========================================================================
+   Node Atom Styles
+   Individual node elements for mind maps
+   ========================================================================== */
+
+.mind-map-node {
+  /* Base Styles */
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  transform-origin: center;
+
+  /* Accessibility */
+  outline: none;
+}
+
+/* ==========================================================================
+   Node Background
+   ========================================================================== */
+
+.mind-map-node__background {
+  fill: var(--color-node-bg-level-1);
+  stroke: var(--color-node-border-level-1);
+  stroke-width: 2;
+  transition: all var(--transition-fast);
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+}
+
+/* ==========================================================================
+   Node Text
+   ========================================================================== */
+
+.mind-map-node__text {
+  fill: var(--color-node-text);
+  font-family: var(--font-family);
+  font-size: 14px;
+  font-weight: var(--font-weight-medium);
+  user-select: none;
+  pointer-events: none;
+  transition: all var(--transition-fast);
+}
+
+/* ==========================================================================
+   Node Levels (Hierarchical Styling)
+   ========================================================================== */
+
+/* Level 1 - Root nodes */
+.mind-map-node--level-1 .mind-map-node__background {
+  fill: var(--color-node-bg-level-1);
+  stroke: var(--color-node-border-level-1);
+  stroke-width: 3;
+}
+
+.mind-map-node--level-1 .mind-map-node__text {
+  font-size: 16px;
+  font-weight: var(--font-weight-bold);
+  fill: var(--color-node-level-1);
+}
+
+/* Level 2 - Secondary nodes */
+.mind-map-node--level-2 .mind-map-node__background {
+  fill: var(--color-node-bg-level-2);
+  stroke: var(--color-node-border-level-2);
+  stroke-width: 2;
+}
+
+.mind-map-node--level-2 .mind-map-node__text {
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  fill: var(--color-node-level-2);
+}
+
+/* Level 3 - Tertiary nodes */
+.mind-map-node--level-3 .mind-map-node__background {
+  fill: var(--color-node-bg-level-3);
+  stroke: var(--color-node-border-level-3);
+  stroke-width: 2;
+}
+
+.mind-map-node--level-3 .mind-map-node__text {
+  font-size: 13px;
+  font-weight: var(--font-weight-medium);
+  fill: var(--color-node-level-3);
+}
+
+/* Level 4 - Quaternary nodes */
+.mind-map-node--level-4 .mind-map-node__background {
+  fill: var(--color-node-bg-level-4);
+  stroke: var(--color-node-border-level-4);
+  stroke-width: 1;
+}
+
+.mind-map-node--level-4 .mind-map-node__text {
+  font-size: 12px;
+  font-weight: var(--font-weight-normal);
+  fill: var(--color-node-level-4);
+}
+
+/* Level 5+ - Leaf nodes */
+.mind-map-node--level-5 .mind-map-node__background {
+  fill: var(--color-node-bg-level-5);
+  stroke: var(--color-node-border-level-5);
+  stroke-width: 1;
+}
+
+.mind-map-node--level-5 .mind-map-node__text {
+  font-size: 11px;
+  font-weight: var(--font-weight-normal);
+  fill: var(--color-node-level-5);
+}
+
+/* ==========================================================================
+   Node States
+   ========================================================================== */
+
+/* Hover State */
+.mind-map-node:hover .mind-map-node__background {
+  fill: var(--color-node-hover);
+  stroke-width: 3;
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+  transform: scale(1.02);
+}
+
+.mind-map-node:hover .mind-map-node__text {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Selected State */
+.mind-map-node--selected .mind-map-node__background {
+  fill: var(--color-node-selected);
+  stroke: var(--color-focus);
+  stroke-width: 3;
+  filter: drop-shadow(0 4px 12px rgba(59, 130, 246, 0.3));
+}
+
+.mind-map-node--selected .mind-map-node__text {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Focus State (for accessibility) */
+.mind-map-node:focus .mind-map-node__background {
+  stroke: var(--color-focus);
+  stroke-width: 4;
+  stroke-dasharray: 2 2;
+}
+
+/* Active State */
+.mind-map-node:active .mind-map-node__background {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   Node Types
+   ========================================================================== */
+
+/* Root Node */
+.mind-map-node--root .mind-map-node__background {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+}
+
+.mind-map-node--root .mind-map-node__text {
+  font-weight: var(--font-weight-bold);
+}
+
+/* Leaf Node */
+.mind-map-node--leaf .mind-map-node__background {
+  opacity: 0.9;
+}
+
+.mind-map-node--leaf .mind-map-node__text {
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Node Animations
+   ========================================================================== */
+
+/* Entrance Animation */
+@keyframes nodeAppear {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.mind-map-node--entering {
+  animation: nodeAppear 0.4s var(--animation-bounce);
+}
+
+/* Pulse Animation for Selected */
+@keyframes nodePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+.mind-map-node--selected {
+  animation: nodePulse 2s infinite;
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  .mind-map-node__text {
+    font-size: 16px; /* Larger text on mobile */
+  }
+
+  .mind-map-node--level-1 .mind-map-node__text {
+    font-size: 18px;
+  }
+
+  .mind-map-node--level-2 .mind-map-node__text {
+    font-size: 16px;
+  }
+
+  .mind-map-node--level-3 .mind-map-node__text {
+    font-size: 15px;
+  }
+
+  .mind-map-node--level-4 .mind-map-node__text {
+    font-size: 14px;
+  }
+
+  .mind-map-node--level-5 .mind-map-node__text {
+    font-size: 13px;
+  }
+
+  /* Larger touch targets */
+  .mind-map-node__background {
+    stroke-width: 3;
+  }
+}
+
+/* ==========================================================================
+   Theme-Specific Adjustments
+   ========================================================================== */
+
+/* Dark Theme */
+.theme-dark .mind-map-node__background {
+  filter: drop-shadow(0 2px 8px rgba(255, 255, 255, 0.1));
+}
+
+.theme-dark .mind-map-node:hover .mind-map-node__background {
+  filter: drop-shadow(0 4px 12px rgba(255, 255, 255, 0.2));
+}
+
+/* Blue Theme */
+.theme-blue .mind-map-node--level-1 .mind-map-node__background {
+  background: linear-gradient(135deg, var(--color-node-bg-level-1) 0%, var(--color-bg-secondary) 100%);
+}
+
+/* Green Theme */
+.theme-green .mind-map-node:hover {
+  transform: translateY(-2px);
+}
+
+/* Orange Theme */
+.theme-orange .mind-map-node:hover {
+  transform: scale(1.05);
+}
+
+.theme-orange .mind-map-node--selected {
+  animation: nodePulse 1.5s infinite;
+}
+
+/* ==========================================================================
+   High Contrast Mode
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  .mind-map-node__background {
+    stroke-width: 3;
+  }
+
+  .mind-map-node__text {
+    font-weight: var(--font-weight-bold);
+  }
+
+  .mind-map-node:focus .mind-map-node__background {
+    stroke-width: 5;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .mind-map-node {
+    transition: none;
+  }
+
+  .mind-map-node__background {
+    transition: none;
+  }
+
+  .mind-map-node__text {
+    transition: none;
+  }
+
+  .mind-map-node--entering {
+    animation: none;
+  }
+
+  .mind-map-node--selected {
+    animation: none;
+  }
+
+  .mind-map-node:hover {
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .mind-map-node__background {
+    fill: white;
+    stroke: black;
+    stroke-width: 2;
+    filter: none;
+  }
+
+  .mind-map-node__text {
+    fill: black;
+  }
+
+  .mind-map-node:hover,
+  .mind-map-node--selected {
+    transform: none;
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Editing State
+   ========================================================================== */
+
+.mind-map-node--editing .mind-map-node__background {
+  stroke: var(--color-text-accent);
+  stroke-width: 3;
+  stroke-dasharray: 4 2;
+  animation: editingPulse 1s infinite;
+}
+
+@keyframes editingPulse {
+  0%, 100% {
+    stroke-opacity: 1;
+  }
+  50% {
+    stroke-opacity: 0.5;
+  }
+}
+
+/* ==========================================================================
+   Connection Points
+   ========================================================================== */
+
+.mind-map-node__connection-point {
+  fill: var(--color-border-accent);
+  stroke: var(--color-bg-primary);
+  stroke-width: 2;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.mind-map-node:hover .mind-map-node__connection-point {
+  opacity: 1;
+}

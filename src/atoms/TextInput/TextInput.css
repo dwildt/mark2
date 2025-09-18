@@ -1,0 +1,286 @@
+/* ==========================================================================
+   TextInput Atom Styles
+   Base text input and textarea component styles
+   ========================================================================== */
+
+.atom-text-input {
+  /* Base Styles */
+  display: block;
+  width: 100%;
+
+  /* Typography */
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-normal);
+  color: var(--color-text-primary);
+
+  /* Layout */
+  padding: var(--spacing-md);
+  border: 1px solid var(--color-input-border);
+  border-radius: var(--border-radius);
+  background-color: var(--color-input-bg);
+
+  /* Interaction */
+  transition: all var(--transition-fast);
+  resize: none;
+
+  /* Accessibility */
+  min-height: 44px; /* Touch target minimum */
+}
+
+/* ==========================================================================
+   Input States
+   ========================================================================== */
+
+/* Placeholder */
+.atom-text-input::placeholder {
+  color: var(--color-input-placeholder);
+  opacity: 1;
+  font-style: italic;
+}
+
+/* Focus State */
+.atom-text-input:focus {
+  outline: none;
+  border-color: var(--color-input-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  background-color: var(--color-bg-primary);
+}
+
+/* Hover State */
+.atom-text-input:hover:not(:disabled):not(:focus) {
+  border-color: var(--color-border-dark);
+}
+
+/* Disabled State */
+.atom-text-input:disabled,
+.atom-text-input--disabled {
+  background-color: var(--color-bg-disabled);
+  color: var(--color-text-disabled);
+  border-color: var(--color-border-light);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.atom-text-input:disabled::placeholder,
+.atom-text-input--disabled::placeholder {
+  color: var(--color-text-disabled);
+}
+
+/* Error State */
+.atom-text-input--error {
+  border-color: var(--color-text-error);
+  background-color: var(--color-error);
+}
+
+.atom-text-input--error:focus {
+  border-color: var(--color-text-error);
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Success State */
+.atom-text-input--success {
+  border-color: var(--color-text-success);
+  background-color: var(--color-success);
+}
+
+.atom-text-input--success:focus {
+  border-color: var(--color-text-success);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+}
+
+/* ==========================================================================
+   Multiline (Textarea) Styles
+   ========================================================================== */
+
+.atom-text-input--multiline {
+  min-height: 120px;
+  resize: vertical;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Auto-resize behavior */
+.atom-text-input--multiline.auto-resize {
+  resize: none;
+  overflow-y: hidden;
+}
+
+/* ==========================================================================
+   Size Variants
+   ========================================================================== */
+
+.atom-text-input--small {
+  padding: var(--spacing-sm) var(--spacing-md);
+  font-size: var(--font-size-sm);
+  min-height: 36px;
+}
+
+.atom-text-input--large {
+  padding: var(--spacing-lg);
+  font-size: var(--font-size-lg);
+  min-height: 52px;
+}
+
+/* ==========================================================================
+   Input Group Styles
+   ========================================================================== */
+
+.atom-text-input-group {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.atom-text-input-group .atom-text-input {
+  flex: 1;
+  position: relative;
+}
+
+/* Grouped inputs - remove border radius on connecting sides */
+.atom-text-input-group .atom-text-input:not(:first-child) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left-width: 0;
+}
+
+.atom-text-input-group .atom-text-input:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.atom-text-input-group .atom-text-input:focus {
+  z-index: 1;
+  border-left-width: 1px;
+}
+
+/* ==========================================================================
+   Icon Support
+   ========================================================================== */
+
+.atom-text-input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.atom-text-input-wrapper--with-icon-left .atom-text-input {
+  padding-left: calc(var(--spacing-2xl) + var(--spacing-md));
+}
+
+.atom-text-input-wrapper--with-icon-right .atom-text-input {
+  padding-right: calc(var(--spacing-2xl) + var(--spacing-md));
+}
+
+.atom-text-input__icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--spacing-2xl);
+  height: var(--spacing-2xl);
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.atom-text-input__icon--left {
+  left: var(--spacing-md);
+}
+
+.atom-text-input__icon--right {
+  right: var(--spacing-md);
+}
+
+/* ==========================================================================
+   Search Input Styles
+   ========================================================================== */
+
+.atom-text-input--search {
+  padding-left: calc(var(--spacing-2xl) + var(--spacing-md));
+  border-radius: var(--border-radius-full);
+}
+
+.atom-text-input--search::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background: var(--color-text-tertiary);
+  cursor: pointer;
+  margin-right: var(--spacing-sm);
+}
+
+/* ==========================================================================
+   Responsive Adjustments
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  .atom-text-input {
+    font-size: var(--font-size-base);
+    min-height: 48px; /* Larger touch targets on mobile */
+  }
+
+  .atom-text-input--multiline {
+    min-height: 100px;
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* ==========================================================================
+   Dark Theme Adjustments
+   ========================================================================== */
+
+@media (prefers-color-scheme: dark) {
+  .atom-text-input {
+    background-color: var(--color-input-bg);
+    color: var(--color-text-primary);
+  }
+}
+
+/* ==========================================================================
+   High Contrast Mode
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  .atom-text-input {
+    border-width: 2px;
+  }
+
+  .atom-text-input:focus {
+    border-width: 3px;
+    box-shadow: none;
+  }
+}
+
+/* ==========================================================================
+   Selection Styles
+   ========================================================================== */
+
+.atom-text-input::selection {
+  background-color: var(--color-selection);
+  color: var(--color-text-primary);
+}
+
+.atom-text-input::-moz-selection {
+  background-color: var(--color-selection);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .atom-text-input {
+    background: transparent !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+    color: black !important;
+  }
+}

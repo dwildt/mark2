@@ -1,0 +1,189 @@
+/* ==========================================================================
+   Blue Theme
+   Professional blue color palette for corporate and tech environments
+   ========================================================================== */
+
+:root.theme-blue {
+  /* ==========================================================================
+     Background Colors
+     ========================================================================== */
+  --color-bg-primary: #ffffff;
+  --color-bg-secondary: #f0f9ff;
+  --color-bg-tertiary: #e0f2fe;
+  --color-bg-hover: #f0f9ff;
+  --color-bg-active: #e0f2fe;
+  --color-bg-disabled: #f8fafc;
+
+  /* ==========================================================================
+     Text Colors
+     ========================================================================== */
+  --color-text-primary: #0f172a;
+  --color-text-secondary: #1e40af;
+  --color-text-tertiary: #3b82f6;
+  --color-text-inverse: #ffffff;
+  --color-text-disabled: #94a3b8;
+  --color-text-accent: #2563eb;
+  --color-text-error: #dc2626;
+  --color-text-success: #059669;
+  --color-text-warning: #d97706;
+
+  /* ==========================================================================
+     Border Colors
+     ========================================================================== */
+  --color-border: #bfdbfe;
+  --color-border-light: #e0f2fe;
+  --color-border-dark: #93c5fd;
+  --color-border-accent: #2563eb;
+  --color-focus: #2563eb;
+  --color-selection: rgba(37, 99, 235, 0.15);
+
+  /* ==========================================================================
+     Mind Map Node Colors (Blue Hierarchy)
+     ========================================================================== */
+  --color-node-level-1: #1e3a8a;      /* Root nodes - darkest blue */
+  --color-node-level-2: #1d4ed8;      /* Second level */
+  --color-node-level-3: #2563eb;      /* Third level */
+  --color-node-level-4: #3b82f6;      /* Fourth level */
+  --color-node-level-5: #60a5fa;      /* Fifth level and beyond - lightest blue */
+
+  /* Node Background Colors */
+  --color-node-bg-level-1: #ffffff;
+  --color-node-bg-level-2: #f0f9ff;
+  --color-node-bg-level-3: #e0f2fe;
+  --color-node-bg-level-4: #e0f2fe;
+  --color-node-bg-level-5: #f0f9ff;
+
+  /* Node Border Colors */
+  --color-node-border-level-1: #1e3a8a;
+  --color-node-border-level-2: #1d4ed8;
+  --color-node-border-level-3: #2563eb;
+  --color-node-border-level-4: #3b82f6;
+  --color-node-border-level-5: #60a5fa;
+
+  /* ==========================================================================
+     Node Interactive States
+     ========================================================================== */
+  --color-node-hover: rgba(37, 99, 235, 0.1);
+  --color-node-selected: rgba(37, 99, 235, 0.2);
+  --color-node-text: var(--color-text-primary);
+
+  /* ==========================================================================
+     Connection Lines
+     ========================================================================== */
+  --color-connection: #93c5fd;
+  --color-connection-hover: #60a5fa;
+  --color-connection-selected: #3b82f6;
+
+  /* ==========================================================================
+     Status and Feedback Colors
+     ========================================================================== */
+  --color-error: #fef2f2;
+  --color-error-border: #fecaca;
+  --color-warning: #fffbeb;
+  --color-warning-border: #fed7aa;
+  --color-success: #ecfdf5;
+  --color-success-border: #a7f3d0;
+  --color-info: #eff6ff;
+  --color-info-border: #bfdbfe;
+
+  /* ==========================================================================
+     Component Specific Colors
+     ========================================================================== */
+
+  /* Header */
+  --color-header-bg: var(--color-bg-primary);
+  --color-header-border: var(--color-border);
+  --color-header-text: var(--color-text-primary);
+
+  /* Sidebar/Editor Panel */
+  --color-sidebar-bg: var(--color-bg-secondary);
+  --color-sidebar-border: var(--color-border);
+
+  /* Modal */
+  --color-modal-bg: var(--color-bg-primary);
+  --color-modal-backdrop: rgba(30, 64, 175, 0.5);
+  --color-modal-border: var(--color-border);
+
+  /* Form Elements */
+  --color-input-bg: var(--color-bg-primary);
+  --color-input-border: var(--color-border);
+  --color-input-focus: var(--color-focus);
+  --color-input-placeholder: var(--color-text-tertiary);
+
+  /* Buttons */
+  --color-button-primary-bg: var(--color-text-accent);
+  --color-button-primary-text: var(--color-text-inverse);
+  --color-button-primary-hover: #1d4ed8;
+
+  --color-button-secondary-bg: var(--color-bg-tertiary);
+  --color-button-secondary-text: var(--color-text-secondary);
+  --color-button-secondary-hover: var(--color-bg-active);
+
+  --color-button-ghost-bg: transparent;
+  --color-button-ghost-text: var(--color-text-secondary);
+  --color-button-ghost-hover: var(--color-bg-hover);
+
+  /* Loading States */
+  --color-loading-bg: var(--color-bg-secondary);
+  --color-loading-text: var(--color-text-secondary);
+  --color-spinner: var(--color-text-accent);
+
+  /* ==========================================================================
+     Theme Preview Colors (for theme selector)
+     ========================================================================== */
+  --theme-preview-primary: #ffffff;
+  --theme-preview-secondary: #e0f2fe;
+  --theme-preview-accent: #2563eb;
+  --theme-preview-text: #1e3a8a;
+}
+
+/* ==========================================================================
+   Blue Theme Specific Adjustments
+   ========================================================================== */
+
+.theme-blue {
+  color-scheme: light;
+}
+
+/* Enhanced focus states for blue theme */
+.theme-blue .atom-button:focus,
+.theme-blue .atom-text-input:focus {
+  outline-color: var(--color-focus);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Blue theme shadows */
+.theme-blue .molecule-modal__content {
+  box-shadow: var(--shadow-xl), 0 0 20px rgba(37, 99, 235, 0.1);
+}
+
+.theme-blue .organism-header {
+  box-shadow: var(--shadow-sm);
+}
+
+/* Blue theme gradients for enhanced visual hierarchy */
+.theme-blue .mind-map-node--level-1 {
+  background: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
+}
+
+.theme-blue .mind-map-node--level-2 {
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+}
+
+/* ==========================================================================
+   Print Styles for Blue Theme
+   ========================================================================== */
+@media print {
+  .theme-blue {
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #ffffff;
+    --color-text-primary: #000000;
+    --color-text-secondary: #1e3a8a;
+    --color-border: #93c5fd;
+    --shadow: none;
+    --shadow-sm: none;
+    --shadow-md: none;
+    --shadow-lg: none;
+    --shadow-xl: none;
+  }
+}

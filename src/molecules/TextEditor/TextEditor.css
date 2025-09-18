@@ -1,0 +1,368 @@
+/* ==========================================================================
+   TextEditor Molecule Styles
+   Enhanced text input with markdown support and features
+   ========================================================================== */
+
+.molecule-text-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: var(--color-bg-primary);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   Text Input Area
+   ========================================================================== */
+
+.molecule-text-editor__input {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-relaxed);
+  resize: none;
+  outline: none;
+  transition: border-color var(--transition-fast);
+
+  /* Better text rendering */
+  -webkit-font-smoothing: auto;
+  -moz-osx-font-smoothing: auto;
+}
+
+.molecule-text-editor__input:focus {
+  border-color: var(--color-focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* ==========================================================================
+   Stats and Status Bar
+   ========================================================================== */
+
+.molecule-text-editor__stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  flex-shrink: 0;
+}
+
+.molecule-text-editor__stats-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.molecule-text-editor__status {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+}
+
+/* ==========================================================================
+   Status States
+   ========================================================================== */
+
+.molecule-text-editor__status--saved {
+  color: var(--color-text-success);
+}
+
+.molecule-text-editor__status--saved::before {
+  content: '✓';
+  color: var(--color-text-success);
+}
+
+.molecule-text-editor__status--unsaved {
+  color: var(--color-text-warning);
+}
+
+.molecule-text-editor__status--unsaved::before {
+  content: '●';
+  color: var(--color-text-warning);
+}
+
+.molecule-text-editor__status--error {
+  color: var(--color-text-error);
+}
+
+.molecule-text-editor__status--error::before {
+  content: '⚠';
+  color: var(--color-text-error);
+}
+
+/* Flash animation for save confirmation */
+.molecule-text-editor__status--flash {
+  animation: statusFlash 0.6s ease-in-out;
+}
+
+@keyframes statusFlash {
+  0%, 100% {
+    background-color: transparent;
+  }
+  50% {
+    background-color: var(--color-success);
+    color: var(--color-text-primary);
+    border-radius: var(--border-radius-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+/* ==========================================================================
+   Markdown Syntax Highlighting
+   ========================================================================== */
+
+.molecule-text-editor__input {
+  /* Base text color */
+  color: var(--color-text-primary);
+}
+
+/* Placeholder enhancement */
+.molecule-text-editor__input::placeholder {
+  color: var(--color-text-tertiary);
+  font-style: italic;
+  line-height: var(--line-height-relaxed);
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  .molecule-text-editor__input {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-normal);
+    padding: var(--spacing-md);
+  }
+
+  .molecule-text-editor__stats {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm);
+  }
+
+  .molecule-text-editor__stats-display {
+    font-size: var(--font-size-xs);
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Very small mobile screens */
+@media (max-width: 480px) {
+  .molecule-text-editor__stats-display {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-xs);
+  }
+}
+
+/* ==========================================================================
+   Theme Specific Adjustments
+   ========================================================================== */
+
+/* Dark Theme */
+.theme-dark .molecule-text-editor__input {
+  background-color: var(--color-bg-tertiary);
+  color: var(--color-text-primary);
+}
+
+.theme-dark .molecule-text-editor__input::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+/* ==========================================================================
+   Editor Enhancements
+   ========================================================================== */
+
+/* Line numbers (if implemented) */
+.molecule-text-editor--with-line-numbers {
+  position: relative;
+}
+
+.molecule-text-editor__line-numbers {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40px;
+  background-color: var(--color-bg-tertiary);
+  border-right: 1px solid var(--color-border);
+  padding: var(--spacing-md) var(--spacing-sm);
+  font-family: var(--font-family-mono);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  text-align: right;
+  user-select: none;
+  pointer-events: none;
+}
+
+.molecule-text-editor--with-line-numbers .molecule-text-editor__input {
+  padding-left: calc(40px + var(--spacing-md));
+}
+
+/* ==========================================================================
+   Toolbar Integration
+   ========================================================================== */
+
+.molecule-text-editor__toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: var(--color-bg-secondary);
+  border: 1px solid var(--color-border);
+  border-bottom: none;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.molecule-text-editor--with-toolbar .molecule-text-editor__input {
+  border-radius: 0;
+}
+
+.molecule-text-editor__toolbar-button {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.molecule-text-editor__toolbar-button:hover {
+  background-color: var(--color-bg-hover);
+  color: var(--color-text-primary);
+}
+
+.molecule-text-editor__toolbar-button:active {
+  background-color: var(--color-bg-active);
+}
+
+/* ==========================================================================
+   Focus and Selection States
+   ========================================================================== */
+
+.molecule-text-editor:focus-within {
+  outline: none;
+}
+
+.molecule-text-editor:focus-within .molecule-text-editor__stats {
+  border-color: var(--color-focus);
+}
+
+/* Selection styling */
+.molecule-text-editor__input::selection {
+  background-color: var(--color-selection);
+  color: var(--color-text-primary);
+}
+
+.molecule-text-editor__input::-moz-selection {
+  background-color: var(--color-selection);
+  color: var(--color-text-primary);
+}
+
+/* ==========================================================================
+   Accessibility Enhancements
+   ========================================================================== */
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .molecule-text-editor__input {
+    border-width: 2px;
+  }
+
+  .molecule-text-editor__stats {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .molecule-text-editor__input {
+    transition: none;
+  }
+
+  .molecule-text-editor__status {
+    transition: none;
+  }
+
+  .molecule-text-editor__status--flash {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .molecule-text-editor__stats {
+    display: none;
+  }
+
+  .molecule-text-editor__input {
+    border: 1px solid black;
+    background: white;
+    color: black;
+    border-radius: 0;
+  }
+}
+
+/* ==========================================================================
+   Drag and Drop Support
+   ========================================================================== */
+
+.molecule-text-editor__input.dragover {
+  border-color: var(--color-text-accent);
+  background-color: var(--color-bg-hover);
+}
+
+/* ==========================================================================
+   Error States
+   ========================================================================== */
+
+.molecule-text-editor--error .molecule-text-editor__input {
+  border-color: var(--color-text-error);
+  background-color: var(--color-error);
+}
+
+.molecule-text-editor--error .molecule-text-editor__input:focus {
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* ==========================================================================
+   Loading State
+   ========================================================================== */
+
+.molecule-text-editor--loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.molecule-text-editor--loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--color-border);
+  border-top: 2px solid var(--color-text-accent);
+  border-radius: 50%;
+  animation: editorSpin 1s linear infinite;
+}
+
+@keyframes editorSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

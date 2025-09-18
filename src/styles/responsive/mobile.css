@@ -1,0 +1,468 @@
+/* ==========================================================================
+   Mobile Styles (max-width: 767px)
+   Mobile-first responsive design for smartphones
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  /* ==========================================================================
+     Layout Adjustments
+     ========================================================================== */
+
+  .template-app-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .template-app-layout__main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ==========================================================================
+     Header Mobile
+     ========================================================================== */
+
+  .organism-header {
+    padding: var(--spacing-sm) var(--spacing-md);
+    height: var(--header-height);
+    flex-shrink: 0;
+  }
+
+  .organism-header__container {
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .organism-header__title {
+    font-size: var(--font-size-lg);
+  }
+
+  .molecule-toolbar {
+    gap: var(--spacing-sm);
+  }
+
+  /* ==========================================================================
+     Mobile Navigation Tabs
+     ========================================================================== */
+
+  .organism-mobile-nav {
+    display: flex;
+    background-color: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    height: var(--mobile-nav-height);
+    flex-shrink: 0;
+    z-index: var(--z-index-dropdown);
+  }
+
+  .atom-button--mobile {
+    flex: 1;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    font-weight: var(--font-weight-medium);
+    transition: all var(--transition-fast);
+  }
+
+  .atom-button--mobile[aria-pressed="true"] {
+    background-color: var(--color-bg-active);
+    color: var(--color-text-accent);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  /* ==========================================================================
+     Panel Switching (Mobile Tabs)
+     ========================================================================== */
+
+  .organism-editor-panel,
+  .organism-mind-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s var(--animation-ease-out);
+    pointer-events: none;
+    background-color: var(--color-bg-primary);
+  }
+
+  .organism-editor-panel.active,
+  .organism-mind-map.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    z-index: 1;
+  }
+
+  /* Editor panel slides from left */
+  .organism-editor-panel {
+    transform: translateX(-100%);
+  }
+
+  /* ==========================================================================
+     Editor Panel Mobile
+     ========================================================================== */
+
+  .organism-editor-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .organism-editor-panel__header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .organism-editor-panel__title {
+    font-size: var(--font-size-lg);
+    margin: 0;
+  }
+
+  .organism-editor-panel__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .molecule-text-editor {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .atom-text-input--multiline {
+    flex: 1;
+    margin: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    resize: none;
+    overflow-y: auto;
+  }
+
+  /* ==========================================================================
+     Mind Map Panel Mobile
+     ========================================================================== */
+
+  .organism-mind-map {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .organism-mind-map__header {
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+    flex-shrink: 0;
+  }
+
+  .organism-mind-map__title {
+    font-size: var(--font-size-lg);
+    margin: 0;
+  }
+
+  .organism-mind-map__content {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .mind-map-container {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    touch-action: pan-x pan-y;
+  }
+
+  .mind-map-svg {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+  }
+
+  /* ==========================================================================
+     Touch Interactions
+     ========================================================================== */
+
+  .mind-map-container {
+    /* Enable momentum scrolling on iOS */
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  /* Larger touch targets for mobile */
+  .mind-map-node {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .atom-button {
+    min-height: 48px;
+    min-width: 48px;
+    touch-action: manipulation;
+  }
+
+  /* ==========================================================================
+     Toolbar Mobile
+     ========================================================================== */
+
+  .molecule-toolbar--compact {
+    gap: var(--spacing-xs);
+  }
+
+  .molecule-toolbar--compact .atom-button {
+    padding: var(--spacing-sm);
+    min-width: 40px;
+    font-size: var(--font-size-sm);
+  }
+
+  /* ==========================================================================
+     Modal Mobile
+     ========================================================================== */
+
+  .molecule-modal__content {
+    margin: var(--spacing-md);
+    max-height: calc(100vh - var(--spacing-2xl));
+    border-radius: var(--border-radius-lg);
+  }
+
+  .molecule-modal__header {
+    padding: var(--spacing-lg);
+  }
+
+  .molecule-modal__body {
+    padding: 0 var(--spacing-lg) var(--spacing-lg);
+    max-height: calc(70vh - 100px);
+    overflow-y: auto;
+  }
+
+  /* ==========================================================================
+     Theme Selector Mobile
+     ========================================================================== */
+
+  .molecule-theme-selector {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+  }
+
+  .atom-theme-option {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    touch-action: manipulation;
+  }
+
+  .atom-theme-option__preview {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .atom-theme-option__label {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ==========================================================================
+     Language Selector Mobile
+     ========================================================================== */
+
+  .atom-language-selector {
+    width: 100%;
+  }
+
+  .atom-language-selector__select {
+    font-size: var(--font-size-base);
+    padding: var(--spacing-md);
+    min-height: 48px;
+  }
+
+  /* ==========================================================================
+     Loading States Mobile
+     ========================================================================== */
+
+  .mind-map-loading,
+  .mind-map-empty,
+  .mind-map-error {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    padding: var(--spacing-xl);
+    max-width: calc(100% - var(--spacing-2xl));
+  }
+
+  .atom-spinner {
+    width: 32px;
+    height: 32px;
+    margin: 0 auto var(--spacing-md);
+  }
+
+  /* ==========================================================================
+     Typography Mobile
+     ========================================================================== */
+
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  h3 {
+    font-size: var(--font-size-lg);
+  }
+
+  p {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* ==========================================================================
+     Help Content Mobile
+     ========================================================================== */
+
+  .help-content {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .help-content ul {
+    padding-left: var(--spacing-lg);
+  }
+
+  .help-content li {
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .help-content code {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background-color: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-sm);
+  }
+
+  /* ==========================================================================
+     Status Bar Mobile
+     ========================================================================== */
+
+  .organism-status-bar {
+    display: none; /* Hide on mobile to save space */
+  }
+
+  /* ==========================================================================
+     Gesture Hints
+     ========================================================================== */
+
+  .mobile-gesture-hint {
+    position: absolute;
+    bottom: var(--spacing-lg);
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius-full);
+    font-size: var(--font-size-xs);
+    z-index: var(--z-index-tooltip);
+    animation: fadeInOut 3s ease-in-out;
+  }
+
+  @keyframes fadeInOut {
+    0%, 100% { opacity: 0; }
+    20%, 80% { opacity: 1; }
+  }
+
+  /* ==========================================================================
+     Safe Area Support (iPhone X+)
+     ========================================================================== */
+
+  .template-app-layout {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .organism-header {
+    padding-top: calc(var(--spacing-sm) + env(safe-area-inset-top));
+  }
+
+  .organism-mobile-nav {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* ==========================================================================
+   Small Mobile Devices (max-width: 480px)
+   ========================================================================== */
+
+@media (max-width: 480px) {
+  .organism-header__title {
+    font-size: var(--font-size-base);
+  }
+
+  .molecule-toolbar {
+    gap: var(--spacing-xs);
+  }
+
+  .atom-button {
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+    min-width: 40px;
+  }
+
+  .molecule-modal__content {
+    margin: var(--spacing-sm);
+    border-radius: var(--border-radius);
+  }
+
+  .atom-text-input--multiline {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* ==========================================================================
+   Landscape Mobile (max-height: 500px)
+   ========================================================================== */
+
+@media (max-width: 767px) and (max-height: 500px) and (orientation: landscape) {
+  .organism-header {
+    padding: var(--spacing-xs) var(--spacing-md);
+    height: 50px;
+  }
+
+  .organism-mobile-nav {
+    height: 40px;
+  }
+
+  .atom-button--mobile {
+    font-size: var(--font-size-sm);
+  }
+
+  .organism-editor-panel__header,
+  .organism-mind-map__header {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .molecule-modal__content {
+    max-height: calc(100vh - var(--spacing-lg));
+  }
+}

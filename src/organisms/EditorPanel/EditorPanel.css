@@ -1,0 +1,437 @@
+/* ==========================================================================
+   EditorPanel Organism Styles
+   Complete editor section with toolbar and text editor
+   ========================================================================== */
+
+.organism-editor-panel {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+
+  /* Styling */
+  background-color: var(--color-sidebar-bg);
+  border-right: 1px solid var(--color-sidebar-border);
+
+  /* Positioning */
+  position: relative;
+  overflow: hidden;
+
+  /* Transition for show/hide */
+  transition: all var(--transition-base);
+}
+
+/* ==========================================================================
+   Header Section
+   ========================================================================== */
+
+.organism-editor-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+  background-color: var(--color-bg-primary);
+  border-bottom: 1px solid var(--color-border);
+  flex-shrink: 0;
+  min-height: 60px;
+}
+
+.organism-editor-panel__title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.organism-editor-panel__toolbar {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   Content Section
+   ========================================================================== */
+
+.organism-editor-panel__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: var(--spacing-md);
+}
+
+.organism-editor-panel__content .molecule-text-editor {
+  flex: 1;
+  height: 100%;
+}
+
+/* ==========================================================================
+   Panel States
+   ========================================================================== */
+
+/* Focused State */
+.organism-editor-panel--focused {
+  border-right-color: var(--color-focus);
+  box-shadow: 2px 0 8px rgba(59, 130, 246, 0.1);
+}
+
+.organism-editor-panel--focused .organism-editor-panel__header {
+  background-color: var(--color-bg-hover);
+}
+
+/* Loading State */
+.organism-editor-panel--loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.organism-editor-panel--loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin: -12px 0 0 -12px;
+  border: 3px solid var(--color-border);
+  border-top: 3px solid var(--color-text-accent);
+  border-radius: 50%;
+  animation: editorPanelSpin 1s linear infinite;
+  z-index: 10;
+}
+
+@keyframes editorPanelSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.organism-editor-panel--error {
+  border-right-color: var(--color-text-error);
+  animation: errorShake 0.5s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Minimized State */
+.organism-editor-panel--minimized {
+  width: 60px;
+  min-width: 60px;
+}
+
+.organism-editor-panel--minimized .organism-editor-panel__content {
+  display: none;
+}
+
+.organism-editor-panel--minimized .organism-editor-panel__title {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: var(--font-size-sm);
+}
+
+.organism-editor-panel--minimized .organism-editor-panel__toolbar {
+  display: none;
+}
+
+/* Hidden State */
+.organism-editor-panel--hidden {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.organism-editor-panel--visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Mobile Responsive
+   ========================================================================== */
+
+.organism-editor-panel--mobile {
+  border-right: none;
+  border-bottom: 1px solid var(--color-sidebar-border);
+}
+
+.organism-editor-panel--mobile .organism-editor-panel__header {
+  padding: var(--spacing-sm) var(--spacing-md);
+  min-height: 50px;
+}
+
+.organism-editor-panel--mobile .organism-editor-panel__title {
+  font-size: var(--font-size-base);
+}
+
+.organism-editor-panel--mobile .organism-editor-panel__content {
+  padding: var(--spacing-sm);
+}
+
+/* ==========================================================================
+   Animation Effects
+   ========================================================================== */
+
+/* Slide in from left */
+.organism-editor-panel--animate-in {
+  animation: editorPanelSlideIn 0.5s var(--animation-ease-out);
+}
+
+@keyframes editorPanelSlideIn {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Responsive Design
+   ========================================================================== */
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .organism-editor-panel {
+    width: var(--sidebar-width);
+    min-width: var(--sidebar-width);
+    max-width: 600px;
+  }
+}
+
+/* Tablet */
+@media (max-width: 1023px) and (min-width: 768px) {
+  .organism-editor-panel {
+    width: 100%;
+    height: 40vh;
+    border-right: none;
+    border-bottom: 1px solid var(--color-sidebar-border);
+  }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .organism-editor-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    z-index: 1;
+
+    /* Initially hidden on mobile */
+    transform: translateX(-100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s var(--animation-ease-out);
+  }
+
+  .organism-editor-panel.active {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .organism-editor-panel__header {
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .organism-editor-panel__content {
+    padding: var(--spacing-sm);
+  }
+}
+
+/* ==========================================================================
+   Theme Specific Adjustments
+   ========================================================================== */
+
+/* Dark Theme */
+.theme-dark .organism-editor-panel {
+  background-color: var(--color-sidebar-bg);
+  border-right-color: var(--color-sidebar-border);
+}
+
+.theme-dark .organism-editor-panel--focused {
+  box-shadow: 2px 0 12px rgba(96, 165, 250, 0.2);
+}
+
+/* Blue Theme */
+.theme-blue .organism-editor-panel__header {
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+}
+
+/* Green Theme */
+.theme-green .organism-editor-panel__header {
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+}
+
+/* Orange Theme */
+.theme-orange .organism-editor-panel__header {
+  background: linear-gradient(135deg, var(--color-bg-primary) 0%, var(--color-bg-secondary) 100%);
+}
+
+/* ==========================================================================
+   Resizable Support
+   ========================================================================== */
+
+.organism-editor-panel--resizable {
+  resize: horizontal;
+  overflow: auto;
+}
+
+.organism-editor-panel__resize-handle {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 10px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 10;
+}
+
+.organism-editor-panel__resize-handle:hover {
+  background: var(--color-border-accent);
+}
+
+.organism-editor-panel__resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 3px;
+  height: 30px;
+  margin: -15px 0 0 -1.5px;
+  background: var(--color-border);
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.organism-editor-panel__resize-handle:hover::after {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Accessibility Enhancements
+   ========================================================================== */
+
+/* Focus management */
+.organism-editor-panel:focus-within {
+  outline: none;
+}
+
+/* Keyboard navigation hints */
+.organism-editor-panel[data-keyboard-active] .organism-editor-panel__header {
+  outline: 2px solid var(--color-focus);
+  outline-offset: -2px;
+}
+
+/* ==========================================================================
+   High Contrast Mode
+   ========================================================================== */
+
+@media (prefers-contrast: high) {
+  .organism-editor-panel {
+    border-right-width: 2px;
+  }
+
+  .organism-editor-panel__header {
+    border-bottom-width: 2px;
+  }
+
+  .organism-editor-panel--focused {
+    border-right-width: 3px;
+    box-shadow: none;
+  }
+}
+
+/* ==========================================================================
+   Reduced Motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .organism-editor-panel {
+    transition: none;
+  }
+
+  .organism-editor-panel--animate-in {
+    animation: none;
+  }
+
+  .organism-editor-panel--loading::after {
+    animation: none;
+  }
+
+  .organism-editor-panel--error {
+    animation: none;
+  }
+}
+
+/* ==========================================================================
+   Print Styles
+   ========================================================================== */
+
+@media print {
+  .organism-editor-panel {
+    background: white !important;
+    border: 1px solid black !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+  }
+
+  .organism-editor-panel__header {
+    background: white !important;
+    border-bottom: 1px solid black !important;
+  }
+
+  .organism-editor-panel__toolbar {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Split View Support
+   ========================================================================== */
+
+.organism-editor-panel--split-horizontal {
+  width: 100%;
+  height: 50%;
+  border-right: none;
+  border-bottom: 1px solid var(--color-sidebar-border);
+}
+
+.organism-editor-panel--split-vertical {
+  width: 50%;
+  height: 100%;
+  border-right: 1px solid var(--color-sidebar-border);
+  border-bottom: none;
+}
+
+/* ==========================================================================
+   Floating Mode
+   ========================================================================== */
+
+.organism-editor-panel--floating {
+  position: absolute;
+  top: var(--spacing-lg);
+  left: var(--spacing-lg);
+  width: 400px;
+  height: 500px;
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-index-modal);
+  resize: both;
+  overflow: auto;
+}
