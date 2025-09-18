@@ -6,7 +6,7 @@ yarn-error.log*
 pnpm-debug.log*
 
 # Production build
-# dist/ - uncommenting for GitHub Pages deployment
+dist/
 build/
 
 # Environment variables
