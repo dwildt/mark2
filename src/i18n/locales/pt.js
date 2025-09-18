@@ -148,9 +148,7 @@ Exemplo:
   export: {
     title: 'Exportar Mapa Mental',
     formats: {
-      png: 'Imagem PNG',
       svg: 'Vetor SVG',
-      pdf: 'Documento PDF',
       json: 'Dados JSON'
     },
     options: {

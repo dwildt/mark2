@@ -5,72 +5,7 @@
 
 class ExportUtils {
   constructor() {
-    this.supportedFormats = ['png', 'svg', 'pdf']
-  }
-
-  /**
-   * Export the mind map as an image
-   * @param {SVGElement} svgElement - The SVG element to export
-   * @param {Object} options - Export options
-   */
-  async exportAsPNG(svgElement, options = {}) {
-    const {
-      width = 1200,
-      height = 800,
-      scale = 2,
-      filename = 'mind-map.png',
-      backgroundColor = '#ffffff'
-    } = options
-
-    try {
-      // Create a canvas element
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-
-      // Set canvas dimensions
-      canvas.width = width * scale
-      canvas.height = height * scale
-
-      // Set white background
-      ctx.fillStyle = backgroundColor
-      ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-      // Get SVG data
-      const svgData = this.getSVGData(svgElement, width, height)
-
-      // Convert SVG to image
-      const img = new Image()
-
-      return new Promise((resolve, reject) => {
-        img.onload = () => {
-          // Scale the context for high DPI
-          ctx.scale(scale, scale)
-
-          // Draw the image
-          ctx.drawImage(img, 0, 0, width, height)
-
-          // Convert canvas to blob
-          canvas.toBlob((blob) => {
-            if (blob) {
-              this.downloadBlob(blob, filename)
-              resolve(blob)
-            } else {
-              reject(new Error('Failed to create image blob'))
-            }
-          }, 'image/png', 1.0)
-        }
-
-        img.onerror = () => {
-          reject(new Error('Failed to load SVG as image'))
-        }
-
-        // Set the SVG data as image source
-        img.src = 'data:image/svg+xml;base64,' + btoa(svgData)
-      })
-    } catch (error) {
-      console.error('Error exporting as PNG:', error)
-      throw error
-    }
+    this.supportedFormats = ['svg']
   }
 
   /**
@@ -195,15 +130,7 @@ class ExportUtils {
             <div class="export-options">
               <div class="export-format-group">
                 <label class="export-format-option">
-                  <input type="radio" name="export-format" value="png" checked>
-                  <span class="export-format-icon">🖼️</span>
-                  <div class="export-format-info">
-                    <span class="export-format-title">PNG Image</span>
-                    <span class="export-format-description">High quality image, best for sharing</span>
-                  </div>
-                </label>
-                <label class="export-format-option">
-                  <input type="radio" name="export-format" value="svg">
+                  <input type="radio" name="export-format" value="svg" checked>
                   <span class="export-format-icon">🎨</span>
                   <div class="export-format-info">
                     <span class="export-format-title">SVG Vector</span>
@@ -252,14 +179,7 @@ class ExportUtils {
         confirmButton.textContent = 'Exporting...'
         confirmButton.disabled = true
 
-        if (selectedFormat === 'png') {
-          await this.exportAsPNG(svgElement, {
-            filename: `mind-map-${timestamp}.png`,
-            width: 1200,
-            height: 800,
-            scale: 2
-          })
-        } else if (selectedFormat === 'svg') {
+        if (selectedFormat === 'svg') {
           await this.exportAsSVG(svgElement, {
             filename: `mind-map-${timestamp}.svg`,
             width: 1200,

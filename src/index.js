@@ -28,13 +28,11 @@ import './styles/mindmap.css'
 // Import managers
 import languageManager from './i18n/LanguageManager.js'
 import themeManager from './theme/ThemeManager.js'
-
 // Import utilities
 import { parseMarkdown } from './utils/markdownParser.js'
 import { generateLayout } from './utils/mindMapGenerator.js'
 import MindMapRenderer from './utils/mindMapRenderer.js'
 import exportUtils from './utils/ExportUtils.js'
-
 // Import organisms
 import Header from './organisms/Header/index.js'
 import EditorPanel from './organisms/EditorPanel/index.js'
@@ -390,7 +388,7 @@ class Mark2App {
   }
 
   // Event handlers
-  handleMarkdownChange(value, stats) {
+  handleMarkdownChange(value, _stats) {
     console.log('handleMarkdownChange called with value length:', value.length)
     console.log('First 100 chars:', value.substring(0, 100))
     this.currentMarkdown = value

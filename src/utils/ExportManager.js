@@ -8,7 +8,7 @@ import languageManager from '../i18n/LanguageManager.js'
 class ExportManager {
   constructor() {
     this.supportedFormats = {
-      mindmap: ['svg', 'png', 'jpg', 'pdf'],
+      mindmap: ['svg'],
       content: ['md', 'txt', 'html', 'json']
     }
   }
@@ -25,41 +25,6 @@ class ExportManager {
       return this.downloadFile(cleanSVG, filename, 'image/svg+xml')
     } catch (error) {
       throw new Error(languageManager.t('export.errors.svgFailed', { error: error.message }))
-    }
-  }
-
-  async exportMindMapAsPNG(mindmapComponent, options = {}) {
-    try {
-      const blob = await mindmapComponent.exportAsImage('png')
-      const filename = options.filename || this.generateFilename('mindmap', 'png')
-
-      return this.downloadBlob(blob, filename)
-    } catch (error) {
-      throw new Error(languageManager.t('export.errors.pngFailed', { error: error.message }))
-    }
-  }
-
-  async exportMindMapAsJPG(mindmapComponent, options = {}) {
-    try {
-      const blob = await mindmapComponent.exportAsImage('jpg')
-      const filename = options.filename || this.generateFilename('mindmap', 'jpg')
-
-      return this.downloadBlob(blob, filename)
-    } catch (error) {
-      throw new Error(languageManager.t('export.errors.jpgFailed', { error: error.message }))
-    }
-  }
-
-  async exportMindMapAsPDF(mindmapComponent, options = {}) {
-    try {
-      // For PDF export, we'll use SVG as base and convert
-      const svgContent = mindmapComponent.exportAsSVG()
-      const pdfBlob = await this.convertSVGToPDF(svgContent, options)
-      const filename = options.filename || this.generateFilename('mindmap', 'pdf')
-
-      return this.downloadBlob(pdfBlob, filename)
-    } catch (error) {
-      throw new Error(languageManager.t('export.errors.pdfFailed', { error: error.message }))
     }
   }
 
@@ -148,12 +113,6 @@ class ExportManager {
       exportPromises.push(
         this.exportMindMapAsSVG(mindmapComponent, {
           filename: `${baseName}-mindmap.svg`
-        })
-      )
-
-      exportPromises.push(
-        this.exportMindMapAsPNG(mindmapComponent, {
-          filename: `${baseName}-mindmap.png`
         })
       )
 
@@ -282,42 +241,6 @@ class ExportManager {
         fill: none;
       }
     `
-  }
-
-  async convertSVGToPDF(svgContent, options = {}) {
-    // Simple PDF conversion using canvas and jsPDF (would need to be imported)
-    // For now, we'll return a placeholder
-    return new Promise((resolve, reject) => {
-      try {
-        // This would require jsPDF library for actual PDF generation
-        // For now, we'll convert to canvas and then to PDF
-        const canvas = document.createElement('canvas')
-        const ctx = canvas.getContext('2d')
-        const img = new Image()
-
-        img.onload = () => {
-          canvas.width = options.width || 1200
-          canvas.height = options.height || 800
-
-          // Fill white background
-          ctx.fillStyle = 'white'
-          ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-          ctx.drawImage(img, 0, 0, canvas.width, canvas.height)
-
-          canvas.toBlob((blob) => {
-            // For actual PDF generation, we would use jsPDF here
-            // For now, return the canvas as PNG
-            resolve(blob)
-          }, 'image/png')
-        }
-
-        img.onerror = () => reject(new Error('Failed to load SVG for PDF conversion'))
-        img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgContent)))
-      } catch (error) {
-        reject(error)
-      }
-    })
   }
 
   markdownToText(markdown) {

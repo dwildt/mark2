@@ -148,9 +148,7 @@ Example:
   export: {
     title: 'Export Mind Map',
     formats: {
-      png: 'PNG Image',
       svg: 'SVG Vector',
-      pdf: 'PDF Document',
       json: 'JSON Data'
     },
     options: {

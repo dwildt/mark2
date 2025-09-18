@@ -581,26 +581,6 @@ class MindMap {
     return this.svgElement.outerHTML
   }
 
-  exportAsImage(format = 'png') {
-    return new Promise((resolve, reject) => {
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-      const svgData = this.svgElement.outerHTML
-      const img = new Image()
-
-      img.onload = () => {
-        canvas.width = img.width
-        canvas.height = img.height
-        ctx.drawImage(img, 0, 0)
-
-        canvas.toBlob(resolve, `image/${format}`)
-      }
-
-      img.onerror = reject
-      img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgData)))
-    })
-  }
-
   setLoading(loading) {
     if (loading) {
       this.element?.classList.add('organism-mindmap--loading')
