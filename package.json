@@ -18,7 +18,7 @@
     "test:ci": "jest --coverage --watchAll=false --ci",
     "test:debug": "DEBUG_TESTS=true jest --runInBand",
     "preview": "http-server dist -p 3000",
-    "deploy": "npm run build && gh-pages -d dist",
+    "deploy": "npx webpack --mode production --config webpack.config.cjs && gh-pages -d dist",
     "clean": "rm -rf dist coverage"
   },
   "keywords": [
