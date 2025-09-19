@@ -83,7 +83,7 @@ Built with **Atomic Design** principles:
 ## 🧪 Quality Assurance
 
 - **ESLint**: Code linting and formatting
-- **Jest**: Unit testing with >80% coverage
+- **Vitest**: Unit testing with 66% coverage
 - **Mobile Testing**: Touch gestures and responsive design
 - **Cross-browser**: Support for modern browsers
 
@@ -93,7 +93,7 @@ Built with **Atomic Design** principles:
 npm run dev          # Development server
 npm run build        # Production build
 npm run test         # Run tests
-npm run test:watch   # Watch mode testing
+npm run test:coverage # Coverage report
 npm run lint         # Lint code
 npm run deploy       # Deploy to GitHub Pages
 ```

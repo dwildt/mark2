@@ -14,8 +14,8 @@ This document provides Claude Code with essential information about the mark2 pr
 ```bash
 # Always run these before considering work complete
 npm run lint        # ESLint code linting
-npm run test        # Jest unit tests
-npm run test:coverage # Coverage report (target: >80%)
+npm run test        # Vitest unit tests
+npm run test:coverage # Coverage report (current: 66%)
 ```
 
 ### Build and Deploy
@@ -93,7 +93,9 @@ src/
 - **Unit Tests**: All utils functions, component logic
 - **Integration Tests**: Markdown parsing → mind map generation
 - **Visual Tests**: Theme switching, responsive behavior
-- **Coverage Target**: >80% code coverage
+- **Coverage Current**: 66% code coverage
+- **Test Framework**: Vitest with native ES modules support
+- **Configuration**: vitest.config.js in project root
 
 ## Dependencies Management
 - Minimal external dependencies

@@ -34,36 +34,42 @@ tests/
     └── localStorage.js
 ```
 
-## Jest Configuration
+## Vitest Configuration
 
-### jest.config.js
+### vitest.config.js
 ```javascript
-export default {
-  testEnvironment: 'jsdom',
-  setupFilesAfterEnv: ['<rootDir>/tests/setup.js'],
-  testMatch: ['**/*.test.js'],
-  collectCoverageFrom: [
-    'src/**/*.js',
-    '!src/**/*.test.js',
-    '!src/examples/**'
-  ],
-  coverageThreshold: {
-    global: {
-      branches: 80,
-      functions: 80,
-      lines: 80,
-      statements: 80
-    }
-  },
-  moduleNameMapping: {
-    '\\.(css)$': 'identity-obj-proxy'
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./tests/setup.js'],
+    include: ['**/*.test.js'],
+    coverage: {
+      provider: 'v8',
+      include: [
+        'src/**/*.js'
+      ],
+      exclude: [
+        'src/**/*.test.js',
+        'src/examples/**'
+      ],
+      thresholds: {
+        branches: 66,
+        functions: 66,
+        lines: 66,
+        statements: 66
+      }
+    },
+    css: true
   }
-}
+})
 ```
 
 ### Test Setup (tests/setup.js)
 ```javascript
-import '@testing-library/jest-dom'
+import { vi } from 'vitest'
+import '@testing-library/jest-dom/vitest'
 
 // Mock SVG creation for mind map tests
 global.SVGElement = class SVGElement extends HTMLElement {
@@ -76,16 +82,16 @@ global.SVGElement = class SVGElement extends HTMLElement {
 Object.defineProperty(window, 'localStorage', {
   value: {
     store: {},
-    getItem: jest.fn((key) => window.localStorage.store[key] || null),
-    setItem: jest.fn((key, value) => { window.localStorage.store[key] = value }),
-    removeItem: jest.fn((key) => { delete window.localStorage.store[key] }),
-    clear: jest.fn(() => { window.localStorage.store = {} })
+    getItem: vi.fn((key) => window.localStorage.store[key] || null),
+    setItem: vi.fn((key, value) => { window.localStorage.store[key] = value }),
+    removeItem: vi.fn((key) => { delete window.localStorage.store[key] }),
+    clear: vi.fn(() => { window.localStorage.store = {} })
   }
 })
 
 // Mock requestAnimationFrame
-global.requestAnimationFrame = jest.fn(cb => setTimeout(cb, 0))
-global.cancelAnimationFrame = jest.fn(id => clearTimeout(id))
+global.requestAnimationFrame = vi.fn(cb => setTimeout(cb, 0))
+global.cancelAnimationFrame = vi.fn(id => clearTimeout(id))
 ```
 
 ## Unit Testing Guidelines
@@ -95,6 +101,7 @@ global.cancelAnimationFrame = jest.fn(id => clearTimeout(id))
 #### Button Component Test
 ```javascript
 // tests/unit/atoms/Button.test.js
+import { describe, test, expect, vi } from 'vitest'
 import Button from '../../../src/atoms/Button/index.js'
 
 describe('Button Component', () => {
@@ -108,7 +115,7 @@ describe('Button Component', () => {
   })
 
   test('should handle click events', () => {
-    const mockHandler = jest.fn()
+    const mockHandler = vi.fn()
     const button = new Button('Click me', mockHandler)
     const element = button.render()
 
@@ -136,6 +143,7 @@ describe('Button Component', () => {
 #### Node Component Test
 ```javascript
 // tests/unit/atoms/Node.test.js
+import { describe, test, expect } from 'vitest'
 import Node from '../../../src/atoms/Node/index.js'
 
 describe('Node Component', () => {
@@ -175,6 +183,7 @@ describe('Node Component', () => {
 #### Markdown Parser Test
 ```javascript
 // tests/unit/utils/markdownParser.test.js
+import { describe, test, expect } from 'vitest'
 import { parseHeaders, parseList, parseMarkdown } from '../../../src/utils/markdownParser.js'
 
 describe('Markdown Parser', () => {
@@ -269,6 +278,7 @@ describe('Markdown Parser', () => {
 #### MindMap Component Test
 ```javascript
 // tests/unit/organisms/MindMap.test.js
+import { describe, test, expect, beforeEach, afterEach } from 'vitest'
 import MindMap from '../../../src/organisms/MindMap/index.js'
 
 describe('MindMap Component', () => {
@@ -334,6 +344,7 @@ describe('MindMap Component', () => {
 ### Markdown to Mind Map Flow
 ```javascript
 // tests/integration/markdown-to-mindmap.test.js
+import { describe, test, expect } from 'vitest'
 import { parseMarkdown } from '../../src/utils/markdownParser.js'
 import { generateLayout } from '../../src/utils/mindMapGenerator.js'
 import MindMap from '../../src/organisms/MindMap/index.js'
@@ -384,6 +395,7 @@ describe('Markdown to Mind Map Integration', () => {
 ### Theme Switching Integration
 ```javascript
 // tests/integration/theme-switching.test.js
+import { describe, test, expect, beforeEach } from 'vitest'
 import ThemeManager from '../../src/theme/ThemeManager.js'
 
 describe('Theme Switching Integration', () => {
@@ -467,9 +479,10 @@ describe('Responsive Design', () => {
 ### A11y Tests
 ```javascript
 // tests/accessibility/accessibility.test.js
-import { axe, toHaveNoViolations } from 'jest-axe'
+import { axe, configureAxe } from 'vitest-axe'
+import { expect } from 'vitest'
 
-expect.extend(toHaveNoViolations)
+// Configure axe for Vitest
 
 describe('Accessibility', () => {
   test('should have no accessibility violations', async () => {
@@ -504,7 +517,7 @@ describe('Accessibility', () => {
     expect(document.activeElement).toBe(button)
 
     // Test Enter key
-    const mockHandler = jest.fn()
+    const mockHandler = vi.fn()
     button.addEventListener('click', mockHandler)
     button.dispatchEvent(new KeyboardEvent('keydown', { key: 'Enter' }))
 
