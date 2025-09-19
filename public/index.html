@@ -301,9 +301,10 @@
             </header>
             <div class="molecule-modal__body">
                 <div class="help-tabs">
-                    <button class="help-tabs__button active" data-tab="hierarchy">Hierarquia</button>
-                    <button class="help-tabs__button" data-tab="markdown">Markdown</button>
-                    <button class="help-tabs__button" data-tab="navigation">Navegação</button>
+                    <button class="help-tabs__button active" data-tab="hierarchy" data-i18n="help.tabs.hierarchy">Hierarquia</button>
+                    <button class="help-tabs__button" data-tab="markdown" data-i18n="help.tabs.markdown">Markdown</button>
+                    <button class="help-tabs__button" data-tab="navigation" data-i18n="help.tabs.navigation">Navegação</button>
+                    <button class="help-tabs__button" data-tab="about" data-i18n="help.tabs.about">Sobre</button>
                 </div>
 
                 <div class="help-content">
@@ -350,6 +351,28 @@
                         </ul>
 
                         <p data-i18n="help.example">Click "Example" to see how "Fundamental Concepts" uses support text.</p>
+                    </div>
+
+                    <div class="help-tab-content" id="tab-about">
+                        <h4 data-i18n="help.about.title">Sobre o mark2</h4>
+                        <p data-i18n="help.about.description">O mark2 é uma ferramenta que transforma texto Markdown em mapas mentais interativos.</p>
+                        
+                        <div class="help-about-links">
+                            <p>
+                                <span class="help-about-links__icon">🚀</span>
+                                <span data-i18n="help.about.github">Projeto disponível no</span>
+                                <a href="https://github.com/dwildt/datas" target="_blank" rel="noopener noreferrer">GitHub</a>
+                            </p>
+                            <p>
+                                <span class="help-about-links__icon">💻</span>
+                                <span data-i18n="help.about.developed">Desenvolvido com vibe coding usando</span>
+                                <a href="https://claude.ai/code" target="_blank" rel="noopener noreferrer">Claude Code</a>
+                            </p>
+                            <p>
+                                <span class="help-about-links__icon">💖</span>
+                                <a href="https://github.com/sponsors/dwildt" target="_blank" rel="noopener noreferrer" data-i18n="help.about.support">Apoie este projeto</a>
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
