@@ -108,6 +108,8 @@ class Mark2App {
     } catch (error) {
       console.error('Failed to initialize mark2 application:', error)
       this.showError('Failed to initialize application: ' + error.message)
+      this.isInitialized = false
+      throw error
     }
   }
 
@@ -999,9 +1001,13 @@ O Atomic Design é uma metodologia para criar sistemas de design escaláveis e r
   }
 
   updateLanguageLabels() {
-    const ptLabel = document.querySelector('input[value="pt"]').closest('.atom-language-option').querySelector('.atom-language-option__label')
-    const enLabel = document.querySelector('input[value="en"]').closest('.atom-language-option').querySelector('.atom-language-option__label')
-    const esLabel = document.querySelector('input[value="es"]').closest('.atom-language-option').querySelector('.atom-language-option__label')
+    const ptInput = document.querySelector('input[value="pt"]')
+    const enInput = document.querySelector('input[value="en"]')
+    const esInput = document.querySelector('input[value="es"]')
+
+    const ptLabel = ptInput?.closest('.atom-language-option')?.querySelector('.atom-language-option__label')
+    const enLabel = enInput?.closest('.atom-language-option')?.querySelector('.atom-language-option__label')
+    const esLabel = esInput?.closest('.atom-language-option')?.querySelector('.atom-language-option__label')
 
     if (ptLabel) ptLabel.textContent = 'Português'
     if (enLabel) enLabel.textContent = 'English'

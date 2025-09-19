@@ -3,6 +3,7 @@
  * End-to-end integration testing for the complete mark2 application
  */
 
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 import Mark2App from '../../src/index.js'
 
 describe('Mark2 Application Integration', () => {
@@ -217,9 +218,9 @@ describe('Mark2 Application Integration', () => {
     test('should update all components on language change', () => {
       // Mock language manager
       const mockLanguageManager = {
-        setLanguage: jest.fn(() => true),
-        t: jest.fn(key => key),
-        subscribe: jest.fn(callback => {
+        setLanguage: vi.fn(() => true),
+        t: vi.fn(key => key),
+        subscribe: vi.fn(callback => {
           // Simulate language change
           setTimeout(() => callback('en', 'pt'), 10)
           return () => {} // unsubscribe function
@@ -341,7 +342,7 @@ describe('Mark2 Application Integration', () => {
         key: ',',
         ctrlKey: true
       })
-      helpEvent.preventDefault = jest.fn()
+      helpEvent.preventDefault = vi.fn()
 
       document.dispatchEvent(helpEvent)
 
@@ -357,7 +358,7 @@ describe('Mark2 Application Integration', () => {
 
     test('should handle export action', () => {
       // Mock the alert since export dialog is not implemented in basic version
-      const alertSpy = jest.spyOn(window, 'alert').mockImplementation()
+      const alertSpy = vi.spyOn(window, 'alert').mockImplementation()
 
       app.handleExport()
 
@@ -405,11 +406,11 @@ describe('Mark2 Application Integration', () => {
     test('should prevent data loss on page unload', () => {
       // Mock dirty content
       app.editorPanel.textEditor = {
-        isDirtyContent: jest.fn(() => true)
+        isDirtyContent: vi.fn(() => true)
       }
 
       const beforeUnloadEvent = testUtils.createMockEvent('beforeunload')
-      beforeUnloadEvent.preventDefault = jest.fn()
+      beforeUnloadEvent.preventDefault = vi.fn()
 
       app.handleBeforeUnload(beforeUnloadEvent)
 
@@ -419,11 +420,11 @@ describe('Mark2 Application Integration', () => {
 
     test('should allow clean exit when no changes', () => {
       app.editorPanel.textEditor = {
-        isDirtyContent: jest.fn(() => false)
+        isDirtyContent: vi.fn(() => false)
       }
 
       const beforeUnloadEvent = testUtils.createMockEvent('beforeunload')
-      beforeUnloadEvent.preventDefault = jest.fn()
+      beforeUnloadEvent.preventDefault = vi.fn()
 
       app.handleBeforeUnload(beforeUnloadEvent)
 
@@ -434,7 +435,7 @@ describe('Mark2 Application Integration', () => {
   describe('Error Handling', () => {
     test('should handle initialization errors gracefully', async () => {
       // Mock error during component creation
-      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
+      const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation()
 
       // Remove app container to force error
       document.body.removeChild(appContainer)
@@ -506,8 +507,8 @@ describe('Mark2 Application Integration', () => {
       app = new Mark2App()
 
       // Mock components with cleanup methods
-      app.header = { destroy: jest.fn() }
-      app.editorPanel = { destroy: jest.fn() }
+      app.header = { destroy: vi.fn() }
+      app.editorPanel = { destroy: vi.fn() }
 
       app.destroy()
 

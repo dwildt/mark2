@@ -3,7 +3,8 @@
  * Test suite for internationalization functionality
  */
 
-import LanguageManager from '../../src/i18n/LanguageManager.js'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
+import { LanguageManager } from '../../src/i18n/LanguageManager.js'
 
 describe('LanguageManager', () => {
   let languageManager
@@ -15,15 +16,15 @@ describe('LanguageManager', () => {
   })
 
   describe('Initialization', () => {
-    test('should initialize with default language (pt)', () => {
-      expect(languageManager.getCurrentLanguage()).toBe('pt')
+    test('should initialize with default language (en)', () => {
+      expect(languageManager.getCurrentLanguage()).toBe('en')
     })
 
     test('should load available languages', () => {
       const languages = languageManager.getAvailableLanguages()
-      expect(languages).toContain('pt')
-      expect(languages).toContain('en')
-      expect(languages).toContain('es')
+      expect(languages.some(lang => lang.code === 'pt')).toBe(true)
+      expect(languages.some(lang => lang.code === 'en')).toBe(true)
+      expect(languages.some(lang => lang.code === 'es')).toBe(true)
     })
 
     test('should detect browser language if supported', () => {
@@ -44,7 +45,7 @@ describe('LanguageManager', () => {
       })
 
       const newManager = new LanguageManager()
-      expect(newManager.getCurrentLanguage()).toBe('pt')
+      expect(newManager.getCurrentLanguage()).toBe('en')
     })
   })
 
@@ -69,27 +70,27 @@ describe('LanguageManager', () => {
     test('should reject invalid language codes', () => {
       const result = languageManager.setLanguage('invalid')
       expect(result).toBe(false)
-      expect(languageManager.getCurrentLanguage()).toBe('pt')
+      expect(languageManager.getCurrentLanguage()).toBe('en')
     })
 
     test('should notify subscribers on language change', () => {
-      const callback = jest.fn()
+      const callback = vi.fn()
       languageManager.subscribe(callback)
 
       languageManager.setLanguage('en')
-      expect(callback).toHaveBeenCalledWith('en', 'pt')
+      expect(callback).toHaveBeenCalledWith('en', 'en')
     })
   })
 
   describe('Translation (t method)', () => {
     test('should translate simple keys', () => {
       const result = languageManager.t('app.title')
-      expect(result).toBe('mark2 - Markdown para Mapa Mental')
+      expect(result).toBe('mark2 - Markdown to Mind Map')
     })
 
     test('should translate nested keys', () => {
       const result = languageManager.t('buttons.save')
-      expect(result).toBe('Salvar')
+      expect(result).toBe('Save')
     })
 
     test('should return key if translation not found', () => {
@@ -162,18 +163,18 @@ describe('LanguageManager', () => {
 
   describe('Subscription System', () => {
     test('should allow subscribing to language changes', () => {
-      const callback = jest.fn()
+      const callback = vi.fn()
       const unsubscribe = languageManager.subscribe(callback)
 
       expect(typeof unsubscribe).toBe('function')
 
       languageManager.setLanguage('en')
       expect(callback).toHaveBeenCalledTimes(1)
-      expect(callback).toHaveBeenCalledWith('en', 'pt')
+      expect(callback).toHaveBeenCalledWith('en', 'en')
     })
 
     test('should allow unsubscribing from language changes', () => {
-      const callback = jest.fn()
+      const callback = vi.fn()
       const unsubscribe = languageManager.subscribe(callback)
 
       unsubscribe()
@@ -183,16 +184,16 @@ describe('LanguageManager', () => {
     })
 
     test('should handle multiple subscribers', () => {
-      const callback1 = jest.fn()
-      const callback2 = jest.fn()
+      const callback1 = vi.fn()
+      const callback2 = vi.fn()
 
       languageManager.subscribe(callback1)
       languageManager.subscribe(callback2)
 
       languageManager.setLanguage('es')
 
-      expect(callback1).toHaveBeenCalledWith('es', 'pt')
-      expect(callback2).toHaveBeenCalledWith('es', 'pt')
+      expect(callback1).toHaveBeenCalledWith('es', 'en')
+      expect(callback2).toHaveBeenCalledWith('es', 'en')
     })
   })
 
@@ -233,7 +234,7 @@ describe('LanguageManager', () => {
     test('should handle missing translation files gracefully', () => {
       // Mock a scenario where language file is missing
       const originalConsoleWarn = console.warn
-      console.warn = jest.fn()
+      console.warn = vi.fn()
 
       languageManager.setLanguage('invalid')
 
@@ -252,7 +253,7 @@ describe('LanguageManager', () => {
       const element = document.createElement('div')
       element.textContent = languageManager.t('app.title')
 
-      expect(element.textContent).toBe('mark2 - Markdown para Mapa Mental')
+      expect(element.textContent).toBe('mark2 - Markdown to Mind Map')
 
       languageManager.setLanguage('en')
       element.textContent = languageManager.t('app.title')

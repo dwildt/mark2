@@ -3,6 +3,7 @@
  * Test suite for MindMap component functionality
  */
 
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 import MindMap from '../../src/organisms/MindMap/index.js'
 
 describe('MindMap Organism', () => {
@@ -209,8 +210,8 @@ describe('MindMap Organism', () => {
     beforeEach(() => {
       mindMap = new MindMap({
         allowInteraction: true,
-        onNodeClick: jest.fn(),
-        onNodeHover: jest.fn()
+        onNodeClick: vi.fn(),
+        onNodeHover: vi.fn()
       })
       mindMap.render()
     })
@@ -341,7 +342,7 @@ describe('MindMap Organism', () => {
 
     test('should handle export errors gracefully', async () => {
       // Mock error scenario
-      HTMLCanvasElement.prototype.getContext = jest.fn(() => null)
+      HTMLCanvasElement.prototype.getContext = vi.fn(() => null)
 
       try {
         await mindMap.exportAsImage('png')
@@ -466,7 +467,7 @@ describe('MindMap Organism', () => {
 
     test('should handle missing SVG support gracefully', () => {
       // Mock missing SVG support
-      document.createElementNS = jest.fn(() => {
+      document.createElementNS = vi.fn(() => {
         throw new Error('SVG not supported')
       })
 
@@ -498,7 +499,7 @@ describe('MindMap Organism', () => {
       mindMap = new MindMap()
       mindMap.render()
 
-      const unsubscribeSpy = jest.fn()
+      const unsubscribeSpy = vi.fn()
       mindMap.unsubscribe = unsubscribeSpy
 
       mindMap.destroy()

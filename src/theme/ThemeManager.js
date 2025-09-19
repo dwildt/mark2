@@ -6,8 +6,9 @@
 class ThemeManager {
   constructor() {
     this.themes = ['light', 'dark', 'blue', 'green', 'orange']
-    this.currentTheme = 'light'
+    this.currentTheme = 'dark'
     this.subscribers = []
+    this.useSystemTheme = false
 
     this.init()
   }
@@ -25,7 +26,7 @@ class ThemeManager {
 
   loadStoredTheme() {
     try {
-      const stored = localStorage.getItem('preferred-theme')
+      const stored = localStorage.getItem('mark2_theme')
       if (stored && this.themes.includes(stored)) {
         this.currentTheme = stored
       } else {
@@ -34,7 +35,7 @@ class ThemeManager {
       }
     } catch (error) {
       console.warn('Could not load theme from localStorage:', error)
-      this.currentTheme = 'light'
+      this.currentTheme = 'dark'
     }
   }
 
@@ -42,7 +43,7 @@ class ThemeManager {
     if (typeof window !== 'undefined' && window.matchMedia) {
       return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
     }
-    return 'light'
+    return 'dark'
   }
 
   setTheme(themeName) {
@@ -70,7 +71,8 @@ class ThemeManager {
       document.documentElement.classList.remove(`theme-${theme}`)
     })
 
-    // Add new theme class to documentElement (:root)
+    // Add new theme class to both body and documentElement
+    document.body.classList.add(`theme-${themeName}`)
     document.documentElement.classList.add(`theme-${themeName}`)
 
     // Update meta theme-color for mobile browsers
@@ -98,7 +100,7 @@ class ThemeManager {
 
   storeTheme(themeName) {
     try {
-      localStorage.setItem('preferred-theme', themeName)
+      localStorage.setItem('mark2_theme', themeName)
     } catch (error) {
       console.warn('Could not store theme in localStorage:', error)
     }
@@ -177,7 +179,7 @@ class ThemeManager {
 
     const handleSystemThemeChange = (e) => {
       // Only auto-switch if user hasn't manually set a theme
-      const hasManualTheme = localStorage.getItem('preferred-theme')
+      const hasManualTheme = localStorage.getItem('mark2_theme')
       if (!hasManualTheme) {
         const systemTheme = e.matches ? 'dark' : 'light'
         this.setTheme(systemTheme)
@@ -195,7 +197,7 @@ class ThemeManager {
 
   resetToSystemTheme() {
     try {
-      localStorage.removeItem('preferred-theme')
+      localStorage.removeItem('mark2_theme')
       const systemTheme = this.getSystemTheme()
       this.setTheme(systemTheme)
     } catch (error) {
@@ -233,6 +235,92 @@ class ThemeManager {
     if (typeof document === 'undefined') return
 
     document.documentElement.style.setProperty(propertyName, value)
+  }
+
+  // Missing methods expected by tests
+  getThemeName(themeName) {
+    const themeNames = {
+      light: 'Light',
+      dark: 'Dark',
+      blue: 'Blue',
+      green: 'Green',
+      orange: 'Orange'
+    }
+    return themeNames[themeName] || themeName
+  }
+
+  getThemeDescription(themeName) {
+    const descriptions = {
+      light: 'Clean light theme with white background',
+      dark: 'Comfortable dark theme for low-light environments',
+      blue: 'Calm blue theme inspired by the sky',
+      green: 'Natural green theme for a fresh look',
+      orange: 'Warm orange theme for energy and creativity'
+    }
+    return descriptions[themeName] || 'Custom theme'
+  }
+
+  isDarkTheme(themeName = null) {
+    const theme = themeName || this.currentTheme
+    return theme === 'dark'
+  }
+
+  getThemeColors(themeName) {
+    const colors = {
+      light: { primary: '#000000', secondary: '#666666', accent: '#0066cc' },
+      dark: { primary: '#ffffff', secondary: '#cccccc', accent: '#3399ff' },
+      blue: { primary: '#1e40af', secondary: '#3b82f6', accent: '#60a5fa' },
+      green: { primary: '#166534', secondary: '#22c55e', accent: '#4ade80' },
+      orange: { primary: '#c2410c', secondary: '#f97316', accent: '#fb923c' }
+    }
+    return colors[themeName] || colors.light
+  }
+
+  getThemeVariables() {
+    const theme = this.currentTheme
+    return {
+      '--color-primary': this.getCSSCustomProperty('--color-primary'),
+      '--color-secondary': this.getCSSCustomProperty('--color-secondary'),
+      '--color-accent': this.getCSSCustomProperty('--color-accent'),
+      '--bg-primary': this.getCSSCustomProperty('--bg-primary'),
+      '--bg-secondary': this.getCSSCustomProperty('--bg-secondary')
+    }
+  }
+
+  setSystemTheme(useSystem) {
+    this.useSystemTheme = useSystem
+    if (useSystem) {
+      localStorage.removeItem('mark2_theme')
+      this.setTheme(this.getSystemTheme())
+    }
+  }
+
+  isSystemTheme() {
+    return this.useSystemTheme || !localStorage.getItem('mark2_theme')
+  }
+
+  isValidTheme(themeName) {
+    return this.themes.includes(themeName)
+  }
+
+  prefersHighContrast() {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      return window.matchMedia('(prefers-contrast: high)').matches
+    }
+    return false
+  }
+
+  prefersReducedMotion() {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    }
+    return false
+  }
+
+  handleStorageChange(event) {
+    if (event.key === 'mark2_theme' && event.newValue) {
+      this.setTheme(event.newValue)
+    }
   }
 
   destroy() {

@@ -5,6 +5,7 @@
 
 // Mock DOM environment for Node.js testing
 import { JSDOM } from 'jsdom'
+import { vi } from 'vitest'
 
 // Setup DOM environment
 const dom = new JSDOM('<!DOCTYPE html><html><body></body></html>', {
@@ -27,24 +28,24 @@ global.cancelAnimationFrame = clearTimeout
 
 // Mock localStorage
 const localStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
 }
 global.localStorage = localStorageMock
 
 // Mock sessionStorage
 const sessionStorageMock = {
-  getItem: jest.fn(),
-  setItem: jest.fn(),
-  removeItem: jest.fn(),
-  clear: jest.fn(),
+  getItem: vi.fn(),
+  setItem: vi.fn(),
+  removeItem: vi.fn(),
+  clear: vi.fn(),
 }
 global.sessionStorage = sessionStorageMock
 
 // Mock fetch API
-global.fetch = jest.fn(() =>
+global.fetch = vi.fn(() =>
   Promise.resolve({
     ok: true,
     json: () => Promise.resolve({}),
@@ -53,22 +54,22 @@ global.fetch = jest.fn(() =>
 )
 
 // Mock ResizeObserver
-global.ResizeObserver = jest.fn().mockImplementation(() => ({
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
+global.ResizeObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
 }))
 
 // Mock IntersectionObserver
-global.IntersectionObserver = jest.fn().mockImplementation(() => ({
-  observe: jest.fn(),
-  unobserve: jest.fn(),
-  disconnect: jest.fn(),
+global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+  observe: vi.fn(),
+  unobserve: vi.fn(),
+  disconnect: vi.fn(),
 }))
 
 // Mock URL.createObjectURL and revokeObjectURL
-global.URL.createObjectURL = jest.fn(() => 'blob:mock-url')
-global.URL.revokeObjectURL = jest.fn()
+global.URL.createObjectURL = vi.fn(() => 'blob:mock-url')
+global.URL.revokeObjectURL = vi.fn()
 
 // Mock File and FileReader
 global.File = class File {
@@ -108,44 +109,44 @@ global.FileReader = class FileReader {
 }
 
 // Mock Canvas API
-HTMLCanvasElement.prototype.getContext = jest.fn(() => ({
-  fillRect: jest.fn(),
-  clearRect: jest.fn(),
-  getImageData: jest.fn(() => ({ data: new Array(4) })),
-  putImageData: jest.fn(),
-  createImageData: jest.fn(() => ({ data: new Array(4) })),
-  setTransform: jest.fn(),
-  drawImage: jest.fn(),
-  save: jest.fn(),
-  fillText: jest.fn(),
-  restore: jest.fn(),
-  beginPath: jest.fn(),
-  moveTo: jest.fn(),
-  lineTo: jest.fn(),
-  closePath: jest.fn(),
-  stroke: jest.fn(),
-  translate: jest.fn(),
-  scale: jest.fn(),
-  rotate: jest.fn(),
-  arc: jest.fn(),
-  fill: jest.fn(),
-  measureText: jest.fn(() => ({ width: 0 })),
-  transform: jest.fn(),
-  rect: jest.fn(),
-  clip: jest.fn(),
-  toDataURL: jest.fn(() => 'data:image/png;base64,mock'),
-  toBlob: jest.fn((callback) => callback(new Blob(['mock'], { type: 'image/png' }))),
+HTMLCanvasElement.prototype.getContext = vi.fn(() => ({
+  fillRect: vi.fn(),
+  clearRect: vi.fn(),
+  getImageData: vi.fn(() => ({ data: new Array(4) })),
+  putImageData: vi.fn(),
+  createImageData: vi.fn(() => ({ data: new Array(4) })),
+  setTransform: vi.fn(),
+  drawImage: vi.fn(),
+  save: vi.fn(),
+  fillText: vi.fn(),
+  restore: vi.fn(),
+  beginPath: vi.fn(),
+  moveTo: vi.fn(),
+  lineTo: vi.fn(),
+  closePath: vi.fn(),
+  stroke: vi.fn(),
+  translate: vi.fn(),
+  scale: vi.fn(),
+  rotate: vi.fn(),
+  arc: vi.fn(),
+  fill: vi.fn(),
+  measureText: vi.fn(() => ({ width: 0 })),
+  transform: vi.fn(),
+  rect: vi.fn(),
+  clip: vi.fn(),
+  toDataURL: vi.fn(() => 'data:image/png;base64,mock'),
+  toBlob: vi.fn((callback) => callback(new Blob(['mock'], { type: 'image/png' }))),
 }))
 
 // Mock SVG methods
-global.SVGElement.prototype.getBBox = jest.fn(() => ({
+global.SVGElement.prototype.getBBox = vi.fn(() => ({
   x: 0,
   y: 0,
   width: 100,
   height: 100
 }))
 
-global.SVGElement.prototype.getScreenCTM = jest.fn(() => ({
+global.SVGElement.prototype.getScreenCTM = vi.fn(() => ({
   a: 1, b: 0, c: 0, d: 1, e: 0, f: 0
 }))
 
@@ -177,11 +178,11 @@ global.Image = class Image {
 const originalConsole = global.console
 global.console = {
   ...originalConsole,
-  log: jest.fn(),
-  warn: jest.fn(),
-  error: jest.fn(),
-  info: jest.fn(),
-  debug: jest.fn(),
+  log: vi.fn(),
+  warn: vi.fn(),
+  error: vi.fn(),
+  info: vi.fn(),
+  debug: vi.fn(),
 }
 
 // Restore console for debugging when needed
@@ -230,7 +231,7 @@ global.testUtils = {
 // Setup before each test
 beforeEach(() => {
   // Reset mocks
-  jest.clearAllMocks()
+  vi.clearAllMocks()
   localStorageMock.getItem.mockReturnValue(null)
   localStorageMock.setItem.mockImplementation()
   localStorageMock.removeItem.mockImplementation()

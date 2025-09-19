@@ -3,6 +3,7 @@
  * Test suite for Button component functionality
  */
 
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 import Button from '../../src/atoms/Button/index.js'
 
 describe('Button Atom', () => {
@@ -57,7 +58,7 @@ describe('Button Atom', () => {
 
   describe('Event Handling', () => {
     test('should handle click events', () => {
-      const clickHandler = jest.fn()
+      const clickHandler = vi.fn()
       button = new Button('Test', clickHandler)
       const element = button.render()
 
@@ -66,7 +67,7 @@ describe('Button Atom', () => {
     })
 
     test('should not trigger click when disabled', () => {
-      const clickHandler = jest.fn()
+      const clickHandler = vi.fn()
       button = new Button('Test', clickHandler, 'primary', true)
       const element = button.render()
 
@@ -75,7 +76,7 @@ describe('Button Atom', () => {
     })
 
     test('should handle keyboard events', () => {
-      const clickHandler = jest.fn()
+      const clickHandler = vi.fn()
       button = new Button('Test', clickHandler)
       const element = button.render()
 
@@ -89,11 +90,11 @@ describe('Button Atom', () => {
     })
 
     test('should prevent default on space key', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       const spaceEvent = testUtils.createMockEvent('keydown', { key: ' ' })
-      spaceEvent.preventDefault = jest.fn()
+      spaceEvent.preventDefault = vi.fn()
 
       element.dispatchEvent(spaceEvent)
       expect(spaceEvent.preventDefault).toHaveBeenCalled()
@@ -102,7 +103,7 @@ describe('Button Atom', () => {
 
   describe('State Management', () => {
     beforeEach(() => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
     })
 
     test('should enable/disable button', () => {
@@ -160,7 +161,7 @@ describe('Button Atom', () => {
 
   describe('Icon Handling', () => {
     test('should add icon to button', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       button.setIcon('🎨')
@@ -170,7 +171,7 @@ describe('Button Atom', () => {
     })
 
     test('should remove icon from button', () => {
-      button = new Button('Test', jest.fn(), 'primary', false, '📁')
+      button = new Button('Test', vi.fn(), 'primary', false, '📁')
       const element = button.render()
 
       button.setIcon(null)
@@ -179,7 +180,7 @@ describe('Button Atom', () => {
     })
 
     test('should update existing icon', () => {
-      button = new Button('Test', jest.fn(), 'primary', false, '📁')
+      button = new Button('Test', vi.fn(), 'primary', false, '📁')
       const element = button.render()
 
       button.setIcon('🎨')
@@ -190,7 +191,7 @@ describe('Button Atom', () => {
 
   describe('Accessibility', () => {
     test('should have proper ARIA attributes', () => {
-      button = new Button('Test Button', jest.fn())
+      button = new Button('Test Button', vi.fn())
       const element = button.render()
 
       expect(element.getAttribute('role')).toBe('button')
@@ -198,7 +199,7 @@ describe('Button Atom', () => {
     })
 
     test('should support aria-label', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       button.setAriaLabel('Custom Label')
@@ -206,7 +207,7 @@ describe('Button Atom', () => {
     })
 
     test('should support aria-described-by', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       button.setAriaDescribedBy('description-id')
@@ -214,7 +215,7 @@ describe('Button Atom', () => {
     })
 
     test('should indicate loading state for screen readers', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       button.setLoading(true)
@@ -225,14 +226,14 @@ describe('Button Atom', () => {
     })
 
     test('should be focusable when enabled', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       expect(element.tabIndex).toBe(0)
     })
 
     test('should not be focusable when disabled', () => {
-      button = new Button('Test', jest.fn(), 'primary', true)
+      button = new Button('Test', vi.fn(), 'primary', true)
       const element = button.render()
 
       expect(element.tabIndex).toBe(-1)
@@ -241,7 +242,7 @@ describe('Button Atom', () => {
 
   describe('CSS Classes', () => {
     test('should apply size classes', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       button.setSize('small')
@@ -253,7 +254,7 @@ describe('Button Atom', () => {
     })
 
     test('should apply custom CSS classes', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       button.addClass('custom-class')
@@ -264,7 +265,7 @@ describe('Button Atom', () => {
     })
 
     test('should maintain base classes', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       button.addClass('custom')
@@ -276,7 +277,7 @@ describe('Button Atom', () => {
 
   describe('Focus Management', () => {
     test('should focus button programmatically', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
       document.body.appendChild(element)
 
@@ -285,7 +286,7 @@ describe('Button Atom', () => {
     })
 
     test('should blur button programmatically', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
       document.body.appendChild(element)
 
@@ -295,8 +296,8 @@ describe('Button Atom', () => {
     })
 
     test('should handle focus events', () => {
-      const focusHandler = jest.fn()
-      button = new Button('Test', jest.fn())
+      const focusHandler = vi.fn()
+      button = new Button('Test', vi.fn())
       button.onFocus = focusHandler
       const element = button.render()
 
@@ -306,8 +307,8 @@ describe('Button Atom', () => {
     })
 
     test('should handle blur events', () => {
-      const blurHandler = jest.fn()
-      button = new Button('Test', jest.fn())
+      const blurHandler = vi.fn()
+      button = new Button('Test', vi.fn())
       button.onBlur = blurHandler
       const element = button.render()
 
@@ -319,7 +320,7 @@ describe('Button Atom', () => {
 
   describe('Performance', () => {
     test('should reuse DOM element on multiple renders', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
 
       const element1 = button.render()
       const element2 = button.render()
@@ -328,7 +329,7 @@ describe('Button Atom', () => {
     })
 
     test('should efficiently update text content', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       const textSpan = element.querySelector('.atom-button__text')
@@ -350,14 +351,14 @@ describe('Button Atom', () => {
     })
 
     test('should handle invalid variant gracefully', () => {
-      button = new Button('Test', jest.fn(), 'invalid-variant')
+      button = new Button('Test', vi.fn(), 'invalid-variant')
       const element = button.render()
 
       expect(element.className).toContain('atom-button--primary') // Falls back to primary
     })
 
     test('should handle missing text gracefully', () => {
-      button = new Button('', jest.fn())
+      button = new Button('', vi.fn())
       const element = button.render()
 
       expect(element.textContent.trim()).toBe('')
@@ -367,11 +368,11 @@ describe('Button Atom', () => {
 
   describe('Destruction', () => {
     test('should clean up event listeners on destroy', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
       document.body.appendChild(element)
 
-      const removeEventListenerSpy = jest.spyOn(element, 'removeEventListener')
+      const removeEventListenerSpy = vi.spyOn(element, 'removeEventListener')
 
       button.destroy()
 
@@ -379,7 +380,7 @@ describe('Button Atom', () => {
     })
 
     test('should remove element from DOM on destroy', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
       document.body.appendChild(element)
 
@@ -391,7 +392,7 @@ describe('Button Atom', () => {
     })
 
     test('should prevent further operations after destroy', () => {
-      button = new Button('Test', jest.fn())
+      button = new Button('Test', vi.fn())
       const element = button.render()
 
       button.destroy()

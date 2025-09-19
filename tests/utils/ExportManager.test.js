@@ -3,6 +3,7 @@
  * Test suite for export functionality
  */
 
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
 import ExportManager from '../../src/utils/ExportManager.js'
 
 describe('ExportManager', () => {
@@ -15,9 +16,9 @@ describe('ExportManager', () => {
 
     // Mock MindMap component
     mockMindMap = {
-      exportAsSVG: jest.fn(() => '<svg>mock svg content</svg>'),
-      exportAsImage: jest.fn(() => Promise.resolve(new Blob(['mock'], { type: 'image/png' }))),
-      getSelectedNode: jest.fn(() => ({ id: 'node1', text: 'Test Node' })),
+      exportAsSVG: vi.fn(() => '<svg>mock svg content</svg>'),
+      exportAsImage: vi.fn(() => Promise.resolve(new Blob(['mock'], { type: 'image/png' }))),
+      getSelectedNode: vi.fn(() => ({ id: 'node1', text: 'Test Node' })),
       scale: 1,
       translateX: 0,
       translateY: 0
@@ -25,16 +26,16 @@ describe('ExportManager', () => {
 
     // Mock Editor component
     mockEditor = {
-      getValue: jest.fn(() => '# Test Content\n\nThis is test markdown.'),
-      exportContent: jest.fn(() => ({
+      getValue: vi.fn(() => '# Test Content\n\nThis is test markdown.'),
+      exportContent: vi.fn(() => ({
         content: '# Test Content\n\nThis is test markdown.',
         stats: { words: 5, characters: 35, lines: 3 }
       }))
     }
 
     // Mock URL methods
-    global.URL.createObjectURL = jest.fn(() => 'blob:mock-url')
-    global.URL.revokeObjectURL = jest.fn()
+    global.URL.createObjectURL = vi.fn(() => 'blob:mock-url')
+    global.URL.revokeObjectURL = vi.fn()
 
     // Clear DOM
     testUtils.cleanupDOM()
@@ -95,7 +96,7 @@ describe('ExportManager', () => {
     })
 
     test('should handle export errors', async () => {
-      mockMindMap.exportAsSVG = jest.fn(() => {
+      mockMindMap.exportAsSVG = vi.fn(() => {
         throw new Error('Export failed')
       })
 
@@ -208,7 +209,7 @@ describe('ExportManager', () => {
     })
 
     test('should handle export all errors', async () => {
-      mockMindMap.exportAsSVG = jest.fn(() => {
+      mockMindMap.exportAsSVG = vi.fn(() => {
         throw new Error('SVG export failed')
       })
 
@@ -395,7 +396,7 @@ describe('ExportManager', () => {
 
   describe('Error Handling', () => {
     test('should handle network errors gracefully', async () => {
-      global.fetch = jest.fn(() => Promise.reject(new Error('Network error')))
+      global.fetch = vi.fn(() => Promise.reject(new Error('Network error')))
 
       // Test any export that might use fetch
       await expect(exportManager.exportMindMapAsSVG(mockMindMap))
@@ -404,7 +405,7 @@ describe('ExportManager', () => {
 
     test('should handle blob creation errors', () => {
       const originalBlob = global.Blob
-      global.Blob = jest.fn(() => {
+      global.Blob = vi.fn(() => {
         throw new Error('Blob creation failed')
       })
 
@@ -416,7 +417,7 @@ describe('ExportManager', () => {
 
     test('should handle DOM manipulation errors', () => {
       const originalCreateElement = document.createElement
-      document.createElement = jest.fn(() => {
+      document.createElement = vi.fn(() => {
         throw new Error('Element creation failed')
       })
 

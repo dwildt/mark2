@@ -3,7 +3,8 @@
  * Test suite for theme management functionality
  */
 
-import ThemeManager from '../../src/theme/ThemeManager.js'
+import { describe, test, expect, beforeEach, afterEach, vi } from 'vitest'
+import { ThemeManager } from '../../src/theme/ThemeManager.js'
 
 describe('ThemeManager', () => {
   let themeManager
@@ -32,15 +33,15 @@ describe('ThemeManager', () => {
       // Mock matchMedia for dark mode
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
-        value: jest.fn().mockImplementation(query => ({
+        value: vi.fn().mockImplementation(query => ({
           matches: query === '(prefers-color-scheme: dark)',
           media: query,
           onchange: null,
-          addListener: jest.fn(),
-          removeListener: jest.fn(),
-          addEventListener: jest.fn(),
-          removeEventListener: jest.fn(),
-          dispatchEvent: jest.fn(),
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
         }))
       })
 
@@ -88,7 +89,7 @@ describe('ThemeManager', () => {
     })
 
     test('should notify subscribers on theme change', () => {
-      const callback = jest.fn()
+      const callback = vi.fn()
       themeManager.subscribe(callback)
 
       themeManager.setTheme('dark')
@@ -162,11 +163,11 @@ describe('ThemeManager', () => {
     test('should listen for system theme changes', () => {
       const mockMediaQuery = {
         matches: false,
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn()
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn()
       }
 
-      window.matchMedia = jest.fn(() => mockMediaQuery)
+      window.matchMedia = vi.fn(() => mockMediaQuery)
 
       const newManager = new ThemeManager()
       expect(mockMediaQuery.addEventListener).toHaveBeenCalledWith('change', expect.any(Function))
@@ -180,7 +181,7 @@ describe('ThemeManager', () => {
 
   describe('Subscription System', () => {
     test('should allow subscribing to theme changes', () => {
-      const callback = jest.fn()
+      const callback = vi.fn()
       const unsubscribe = themeManager.subscribe(callback)
 
       expect(typeof unsubscribe).toBe('function')
@@ -190,7 +191,7 @@ describe('ThemeManager', () => {
     })
 
     test('should allow unsubscribing from theme changes', () => {
-      const callback = jest.fn()
+      const callback = vi.fn()
       const unsubscribe = themeManager.subscribe(callback)
 
       unsubscribe()
@@ -200,8 +201,8 @@ describe('ThemeManager', () => {
     })
 
     test('should handle multiple subscribers', () => {
-      const callback1 = jest.fn()
-      const callback2 = jest.fn()
+      const callback1 = vi.fn()
+      const callback2 = vi.fn()
 
       themeManager.subscribe(callback1)
       themeManager.subscribe(callback2)
@@ -236,7 +237,7 @@ describe('ThemeManager', () => {
     })
 
     test('should debounce rapid theme changes', async () => {
-      const callback = jest.fn()
+      const callback = vi.fn()
       themeManager.subscribe(callback)
 
       // Rapid theme changes
@@ -254,10 +255,10 @@ describe('ThemeManager', () => {
   describe('Accessibility', () => {
     test('should support high contrast mode detection', () => {
       // Mock high contrast media query
-      window.matchMedia = jest.fn((query) => ({
+      window.matchMedia = vi.fn((query) => ({
         matches: query.includes('prefers-contrast: high'),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn()
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn()
       }))
 
       const hasHighContrast = themeManager.prefersHighContrast()
@@ -265,10 +266,10 @@ describe('ThemeManager', () => {
     })
 
     test('should support reduced motion detection', () => {
-      window.matchMedia = jest.fn((query) => ({
+      window.matchMedia = vi.fn((query) => ({
         matches: query.includes('prefers-reduced-motion: reduce'),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn()
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn()
       }))
 
       const prefersReducedMotion = themeManager.prefersReducedMotion()
@@ -278,7 +279,7 @@ describe('ThemeManager', () => {
 
   describe('Error Handling', () => {
     test('should handle localStorage errors gracefully', () => {
-      localStorage.setItem = jest.fn(() => {
+      localStorage.setItem = vi.fn(() => {
         throw new Error('Storage quota exceeded')
       })
 
@@ -289,7 +290,7 @@ describe('ThemeManager', () => {
     test('should handle missing CSS gracefully', () => {
       // Mock scenario where theme CSS is not loaded
       const originalConsoleWarn = console.warn
-      console.warn = jest.fn()
+      console.warn = vi.fn()
 
       themeManager.setTheme('nonexistent')
 

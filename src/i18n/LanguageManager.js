@@ -16,7 +16,7 @@ class LanguageManager {
       es
     }
 
-    this.defaultLanguage = 'pt'
+    this.defaultLanguage = 'en'
     this.currentLanguage = this.defaultLanguage
     this.fallbackLanguage = 'en'
     this.subscribers = []
@@ -37,7 +37,7 @@ class LanguageManager {
 
   loadStoredLanguage() {
     try {
-      const stored = localStorage.getItem('preferred-language')
+      const stored = localStorage.getItem('mark2_language')
       if (stored && this.isLanguageAvailable(stored)) {
         this.currentLanguage = stored
       } else {
@@ -111,7 +111,7 @@ class LanguageManager {
 
   storeLanguage(langCode) {
     try {
-      localStorage.setItem('preferred-language', langCode)
+      localStorage.setItem('mark2_language', langCode)
     } catch (error) {
       console.warn('Could not store language in localStorage:', error)
     }
@@ -281,7 +281,7 @@ class LanguageManager {
 
     window.addEventListener('languagechange', () => {
       // Only auto-switch if user hasn't manually set a language
-      const hasManualLanguage = localStorage.getItem('preferred-language')
+      const hasManualLanguage = localStorage.getItem('mark2_language')
       if (!hasManualLanguage) {
         const systemLanguage = this.detectSystemLanguage()
         this.setLanguage(systemLanguage)
@@ -291,7 +291,7 @@ class LanguageManager {
 
   resetToSystemLanguage() {
     try {
-      localStorage.removeItem('preferred-language')
+      localStorage.removeItem('mark2_language')
       const systemLanguage = this.detectSystemLanguage()
       this.setLanguage(systemLanguage)
     } catch (error) {
@@ -363,6 +363,32 @@ class LanguageManager {
       return true
     }
     return false
+  }
+
+  // RTL Support methods
+  isRTL(langCode = null) {
+    const code = langCode || this.currentLanguage
+    const language = this.languages[code]
+    return language?.meta?.direction === 'rtl'
+  }
+
+  getTextDirection(langCode = null) {
+    const code = langCode || this.currentLanguage
+    const language = this.languages[code]
+    return language?.meta?.direction || 'ltr'
+  }
+
+  // Validation methods
+  isValidLanguage(langCode) {
+    if (!langCode || typeof langCode !== 'string') {
+      return false
+    }
+    return this.isLanguageAvailable(langCode)
+  }
+
+  hasTranslation(key, langCode = null) {
+    const code = langCode || this.currentLanguage
+    return this.getTranslation(key, code) !== null
   }
 
   destroy() {
