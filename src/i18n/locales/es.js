@@ -110,6 +110,12 @@ Ejemplo:
   // Help and Instructions
   help: {
     title: 'Cómo usar mark2',
+    tabs: {
+      hierarchy: 'Jerarquía',
+      markdown: 'Markdown',
+      navigation: 'Navegación',
+      about: 'Acerca de'
+    },
     introduction: 'mark2 crea mapas mentales organizados en jerarquía radial, con colores diferentes para cada nivel:',
     hierarchy: {
       title: 'Estructura Jerárquica:',
@@ -141,6 +147,13 @@ Ejemplo:
       drag: 'Arrastra para mover la vista',
       select: 'Haz clic en los nodos para seleccionarlos',
       hierarchy: 'Observa los colores: azul → morado → verde = jerarquía'
+    },
+    about: {
+      title: 'Acerca de mark2',
+      description: 'mark2 es una herramienta que transforma texto Markdown en mapas mentales interactivos.',
+      github: 'Proyecto disponible en',
+      developed: 'Desarrollado con vibe coding usando',
+      support: 'Apoya este proyecto'
     }
   },
 
