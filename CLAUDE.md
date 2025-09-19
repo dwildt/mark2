@@ -2,6 +2,8 @@
 
 This document provides Claude Code with essential information about the mark2 project for effective assistance.
 
+> **Related Documentation**: For GitHub Copilot-specific patterns and guidelines, see [.copilot-instructions.md](./.copilot-instructions.md)
+
 ## Project Overview
 - **Name**: mark2 - Markdown to Mind Map converter
 - **Tech Stack**: Vanilla JavaScript (ES6+), CSS3, HTML5
@@ -146,3 +148,16 @@ src/
 5. Export/sharing capabilities
 
 Remember: This project emphasizes simplicity, performance, and accessibility while maintaining visual appeal and interactive functionality.
+
+## Documentation Maintenance
+
+**Important**: When this Claude documentation is updated, the corresponding GitHub Copilot documentation (`.copilot-instructions.md`) must also be updated to maintain consistency. Both AI assistant tools should have aligned understanding of:
+
+- Project structure and architecture
+- Code conventions and patterns  
+- Component hierarchy and naming
+- Testing strategies
+- Development workflows
+- Theme system implementation
+
+This ensures seamless collaboration between different AI coding assistants working on the project.

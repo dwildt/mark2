@@ -116,6 +116,8 @@ We welcome contributions! Please see our contributing guides:
 5. Run `npm run lint && npm run test`
 6. Submit a pull request
 
+**Note for AI Assistant Documentation**: When updating `CLAUDE.md` or `.copilot-instructions.md`, please ensure both files remain synchronized to maintain consistent AI assistant support across the project.
+
 ## 📁 Project Structure
 
 ```
